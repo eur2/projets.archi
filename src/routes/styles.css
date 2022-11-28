@@ -282,10 +282,10 @@ article header:hover a, .eeee, .bg-grey {
 	margin: auto;
 	width: 600px;
 }
-/* .mix-blend {
+.mix-blend {
 	mix-blend-mode: difference;
 	color: white;
-} */
+}
 .rotate{
 	rotate: 180deg;
 }

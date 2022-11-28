@@ -213,16 +213,6 @@
 			<div class="flex1 p">
 				{#if post.acf.image1}
 					<div class="sm">Planche 1</div>
-					<!-- <div class="mb">
-						{#if post.acf.pdf_planche1}
-							<a rel="noreferrer" target="_blank" href={post.acf.pdf_planche1}
-								>Télécharger au format PDF</a
-							><br />
-						{/if}
-						<a rel="noreferrer" target="_blank" href={post.acf.image1.sizes['2048x2048']}
-							>Télécharger au format JPG</a
-						>
-					</div> -->
 					<a rel="noreferrer" target="_blank" href={post.acf.image1.sizes['2048x2048']}
 						><img
 							src={post.acf.image1.sizes.medium}
@@ -236,16 +226,6 @@
 				{/if}
 				{#if post.acf.image2}
 					<div class="sm">Planche 2</div>
-					<div class="mb">
-						{#if post.acf.pdf_planche2}
-							<a rel="noreferrer" target="_blank" href={post.acf.pdf_planche2}
-								>Télécharger au format PDF</a
-							><br />
-						{/if}
-						<a rel="noreferrer" target="_blank" href={post.acf.image2.sizes['2048x2048']}
-							>Télécharger au format JPG</a
-						>
-					</div>
 					<a rel="noreferrer" target="_blank" href={post.acf.image2.sizes['2048x2048']}
 						><img
 							src={post.acf.image2.sizes.medium}
@@ -259,16 +239,6 @@
 				{/if}
 				{#if post.acf.image3}
 					<div class="sm">Planche 3</div>
-					<div class="mb">
-						{#if post.acf.pdf_planche3}
-							<a rel="noreferrer" target="_blank" href={post.acf.pdf_planche3}
-								>Télécharger au format PDF</a
-							><br />
-						{/if}
-						<a rel="noreferrer" target="_blank" href={post.acf.image3.sizes['2048x2048']}
-							>Télécharger au format JPG</a
-						>
-					</div>
 					<a rel="noreferrer" target="_blank" href={post.acf.image3.sizes['2048x2048']}
 						><img
 							src={post.acf.image3.sizes.medium}

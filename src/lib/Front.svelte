@@ -3,7 +3,7 @@
 	let randomPost = '';
 	import { onMount } from 'svelte';
 	onMount(() => {
-		randomPost = posts[Math.floor(Math.random() * 9)];
+		randomPost = posts[Math.floor(Math.random() * 20)];
 	});
 </script>
 

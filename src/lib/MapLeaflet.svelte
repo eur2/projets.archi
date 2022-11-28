@@ -22,7 +22,7 @@
 
 			const L = await import('leaflet');
 			await import('leaflet.markercluster');
-			map = L.map(mapElement).setView([43.6506786, 1.4408547], 12);
+			map = L.map(mapElement).setView([43.6506786, 1.4408547], 10);
 			L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 				attribution:
 					'© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
