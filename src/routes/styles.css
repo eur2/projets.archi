@@ -38,6 +38,9 @@ p a, h1 a{
 	text-decoration: underline;
 	text-decoration-style: dotted;
 }
+h1{
+	font-size: 2em;
+}
 /* ::selection,.selected, .bg-green {
 	background-color: rgb(36, 252, 131);
 } */
