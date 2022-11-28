@@ -173,7 +173,7 @@
 	style="margin-top:100vh;min-height:75vh;
 "
 > -->
-<main id="index" class="scroll relative bg-grey" style="margin-top:100vh;">
+<main id="index" class="scroll relative bg-grey" style="margin-top:100vh;min-height:100vh;">
 	<aside class="sticky t0 z2 sm">
 		<div class="bg-green">
 			<div class="flex jc-center p251251 w100">
