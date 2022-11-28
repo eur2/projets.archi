@@ -118,17 +118,17 @@
 	categoryPosts = posts.reduce(function (prev, post) {
 		return [...prev, post.acf.architecte];
 	}, []);
-	const architectes = [...new Set(categoryPosts)].sort();
+	const architectes = [...new Set(categoryPosts)].sort().filter((n) => n);
 
 	categoryPosts = posts.reduce(function (prev, post) {
 		return [...prev, post.acf.amenageur];
 	}, []);
-	const amenageur = [...new Set(categoryPosts)].sort();
+	const amenageur = [...new Set(categoryPosts)].sort().filter((n) => n);
 
 	categoryPosts = posts.reduce(function (prev, post) {
 		return [...prev, post.acf.maitre];
 	}, []);
-	const maitres = [...new Set(categoryPosts)].sort();
+	const maitres = [...new Set(categoryPosts)].sort().filter((n) => n);
 
 	categoryPosts = posts.reduce(function (prev, post) {
 		return [...prev, post.acf.bet_general];

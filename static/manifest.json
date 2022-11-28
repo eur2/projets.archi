@@ -1,8 +1,8 @@
 {
   "background_color": "#ffffff",
   "theme_color": "#333333",
-  "name": "MAOP Projets",
-  "short_name": "MAOP Projets",
+  "name": "Projets",
+  "short_name": "Projets",
   "display": "minimal-ui",
   "start_url": "/",
   "icons": [
