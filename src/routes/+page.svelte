@@ -180,7 +180,7 @@
 	<aside class="sticky t0 z2 sm">
 		<div class="bg-green">
 			<div class="flex jc-center p251251 w100">
-				<button class="w150" on:click={handleToggle}>{visible ? '× Filtres' : 'Filtres'}</button>
+				<button class="w150" on:click={handleToggle}>{!visible ? '× Filtres' : 'Filtres'}</button>
 				<form role="search">
 					<input
 						class="center w150"
@@ -192,7 +192,7 @@
 					/>
 				</form>
 			</div>
-			<div class="p251251 wrap {visible ? 'flex' : 'none'}" style="padding-top: 0;">
+			<div class="p251251 wrap {!visible ? 'flex' : 'none'}" style="padding-top: 0;">
 				<Select id="annee" label="Année" values={annee} bind:value={selectAnnee} />
 				<Select
 					id="localisation"
