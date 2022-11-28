@@ -27,7 +27,7 @@
 				/>
 			{/if}
 		</div>
-		<div class="fixed t0 l0 p05 z5">
+		<!-- <div class="fixed t0 l0 p05 z5">
 			<a href="https://maop.fr/" target="_blank" rel="noreferrer">
 				<svg
 					data-name="Logo MAOP"
@@ -53,6 +53,6 @@
 					<path d="M38.67,57.54a6,6,0,0,1-12,0h0a6,6,0,0,1,12,0Z" />
 				</svg>
 			</a>
-		</div>
+		</div> -->
 	{/if}
 </div>
