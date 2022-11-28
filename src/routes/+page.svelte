@@ -1,9 +1,6 @@
 <script>
 	export let data;
 	const { posts } = data;
-	// console.log(data);
-	// console.log(posts[0].acf.plus);
-	//import Logo from '$lib/Logo.svelte';
 	import Front from '$lib/Front.svelte';
 	import Post from '$lib/Post.svelte';
 	import Select from '$lib/Select.svelte';
@@ -176,7 +173,7 @@
 	style="margin-top:100vh;min-height:75vh;
 "
 > -->
-<main id="index" class="bg-grey">
+<main id="index" class="scroll relative bg-grey" style="margin-top:100vh;">
 	<aside class="sticky t0 z2 sm">
 		<div class="bg-green">
 			<div class="flex jc-center p251251 w100">

@@ -1,10 +1,4 @@
-<!-- <script>
-  let visible;
-  function handleToggle() {
-    visible = !visible;
-  }
-</script> -->
-<div class="absolute t0 l0 p05">
+<div class="absolute t0 l0 p05 z5">
 	<a href="https://maop.fr/" target="_blank" rel="noreferrer">
 		<svg
 			data-name="Logo MAOP"

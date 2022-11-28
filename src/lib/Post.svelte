@@ -86,7 +86,9 @@
 	</header>
 	{#if hovering}
 		<div class="absolute z5 thumb" class:none={visible === true}>
-			<img src={post.acf.image0.sizes.medium} width="300" alt="alt" />
+			{#if post.acf.image0}
+				<img src={post.acf.image0.sizes.medium} width="300" alt="alt" />
+			{/if}
 		</div>
 	{/if}
 	{#if visible}
@@ -194,10 +196,12 @@
 					<div class="sm">Structure</div>
 					<div class="mb">{post.acf.structure}</div>
 				</div>
-				<div>
-					<div class="sm">Plus</div>
-					<div class="mb">{post.acf.plus}</div>
-				</div>
+				{#if post.acf.plus}
+					<div>
+						<div class="sm">Plus</div>
+						<div class="mb">{post.acf.plus}</div>
+					</div>
+				{/if}
 			</div>
 			<div class="p flex1">
 				<div>
