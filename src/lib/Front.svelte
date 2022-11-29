@@ -8,7 +8,7 @@
 </script>
 
 <div id="front">
-	<a href="#index">
+	<a href="#index" aria-label="Index">
 		<div class="absolute t0 l0 r0 b0 flex jc-center ai-center bg-green">
 			{#if randomPost && randomPost.acf.image0}
 				<img
