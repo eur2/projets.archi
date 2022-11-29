@@ -5,6 +5,7 @@
 		bet_thermique,
 		bet_environnement,
 		bet_fluides,
+		acousticien,
 		economiste;
 </script>
 
@@ -54,6 +55,11 @@
 		</optgroup>
 		<optgroup label="Economiste">
 			{#each economiste as value}
+				<option value={value.toLowerCase()}>{value}</option>
+			{/each}
+		</optgroup>
+		<optgroup label="Acousticien">
+			{#each acousticien as value}
 				<option value={value.toLowerCase()}>{value}</option>
 			{/each}
 		</optgroup>

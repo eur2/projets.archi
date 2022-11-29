@@ -40,7 +40,10 @@
 				post.acf.bet_environnement.toLowerCase().indexOf(searchTerm) !== -1 ||
 				post.acf.bet_thermique.toLowerCase().indexOf(searchTerm) !== -1 ||
 				post.acf.bet_fluides.toLowerCase().indexOf(searchTerm) !== -1 ||
-				post.acf.bet_general.toLowerCase().indexOf(searchTerm) !== -1
+				post.acf.bet_general.toLowerCase().indexOf(searchTerm) !== -1 ||
+				post.acf.acousticien.toLowerCase().indexOf(searchTerm) !== -1 ||
+				post.acf.economiste.toLowerCase().indexOf(searchTerm) !== -1 ||
+				post.acf.eclairagiste.toLowerCase().indexOf(searchTerm) !== -1
 		)
 		.filter((post) =>
 			checkLaureat === false &&
@@ -69,6 +72,7 @@
 				  (selectMaitre === 'all' || post.acf.maitre.toLowerCase() === selectMaitre) &&
 				  (selectPaysagiste === 'all' || post.acf.paysagiste.toLowerCase() === selectPaysagiste) &&
 				  (selectBureauEtudes === 'all' ||
+						post.acf.acousticien.toLowerCase() === selectBureauEtudes ||
 						post.acf.bet_general.toLowerCase() === selectBureauEtudes ||
 						post.acf.bet_structure.toLowerCase() === selectBureauEtudes ||
 						post.acf.bet_thermique.toLowerCase() === selectBureauEtudes ||
@@ -176,6 +180,11 @@
 		return [...prev, post.acf.paysagiste];
 	}, []);
 	const paysagiste = [...new Set(categoryPosts)].sort().filter((n) => n);
+
+	categoryPosts = posts.reduce(function (prev, post) {
+		return [...prev, post.acf.acousticien];
+	}, []);
+	const acousticien = [...new Set(categoryPosts)].sort().filter((n) => n);
 </script>
 
 <Front {posts} />
@@ -228,6 +237,7 @@
 					{bet_fluides}
 					{bet_thermique}
 					{economiste}
+					{acousticien}
 					bind:value={selectBureauEtudes}
 				/>
 
