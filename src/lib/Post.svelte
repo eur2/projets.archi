@@ -168,10 +168,12 @@
 					<div class="sm">Maître d'ouvrage</div>
 					<div class="mb">{post.acf.maitre}</div>
 				</div>
-				<div>
-					<div class="sm">Aménageur</div>
-					<div class="mb">{post.acf.amenageur}</div>
-				</div>
+				{#if post.acf.amenageur}
+					<div>
+						<div class="sm">Aménageur</div>
+						<div class="mb">{post.acf.amenageur}</div>
+					</div>
+				{/if}
 				<div>
 					<div class="sm">Type</div>
 					<div class="mb">{post.acf.type}</div>

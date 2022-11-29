@@ -27,6 +27,13 @@ p a, h1 a{
 /* ::selection,.selected, .bg-green {
 	background-color: rgb(36, 252, 131);
 } */
+.tag {
+	background-color: #efefef;
+	padding: 0.2em;
+	margin: 0.5em 0.5em 0.5em 0;
+	border-radius: 0.5em;
+	color: black;
+}
 .bg-white {
 	background-color: white;
 }
@@ -36,13 +43,7 @@ p a, h1 a{
 .bg-fbfbfb{
 	background-color: #fbfbfb;
 }
-.tag {
-	background-color: #efefef;
-	padding: 0.2em;
-	margin: 0.5em 0.5em 0.5em 0;
-	border-radius: 0.5em;
-	color: black;
-}
+
 
 a:hover, button:hover,
 footer p a:hover{
@@ -51,7 +52,7 @@ footer p a:hover{
 .current{
 	font-style: italic;
 }
-p {
+p,h1 {
 	margin-block-start: 0;
 	margin-block-end: 1em;
 }

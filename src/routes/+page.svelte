@@ -63,7 +63,9 @@
 				  (selectStructure === 'all' || post.acf.structure.toLowerCase() === selectStructure) &&
 				  (selectSurface === 'all' || post.acf.surface.toLowerCase() === selectSurface) &&
 				  (selectBudget === 'all' || post.acf.budget.toLowerCase() === selectBudget) &&
-				  (selectArchitecte === 'all' || post.acf.architecte.toLowerCase() === selectArchitecte) &&
+				  (selectArchitecte === 'all' ||
+						post.acf.architecte.toLowerCase() === selectArchitecte ||
+						post.acf.architecte_associé.toLowerCase() === selectArchitecte) &&
 				  (selectMaitre === 'all' || post.acf.maitre.toLowerCase() === selectMaitre) &&
 				  (selectPaysagiste === 'all' || post.acf.paysagiste.toLowerCase() === selectPaysagiste) &&
 				  (selectBureauEtudes === 'all' ||
@@ -116,9 +118,19 @@
 	const budgets = [...new Set(categoryPosts)].sort();
 
 	categoryPosts = posts.reduce(function (prev, post) {
+		return [...prev, post.acf.architecte_associé];
+	}, []);
+	const architectes_as = [...new Set(categoryPosts)].sort().filter((n) => n);
+	// console.log(architectes_as);
+
+	categoryPosts = posts.reduce(function (prev, post) {
 		return [...prev, post.acf.architecte];
 	}, []);
-	const architectes = [...new Set(categoryPosts)].sort().filter((n) => n);
+	const architectes = [...new Set(categoryPosts)]
+		.concat(architectes_as)
+		.sort()
+		.filter((n) => n);
+	// console.log(architectes);
 
 	categoryPosts = posts.reduce(function (prev, post) {
 		return [...prev, post.acf.amenageur];
@@ -167,13 +179,8 @@
 </script>
 
 <Front {posts} />
-<!-- <main
-	id="index"
-	class="relative bg-grey"
-	style="margin-top:100vh;min-height:75vh;
-"
-> -->
-<main id="index" class="scroll relative bg-grey" style="margin-top:100vh;min-height:100vh;">
+
+<main id="index" class="relative bg-grey" style="margin-top:100vh;min-height:100vh;">
 	<aside class="sticky t0 z2 sm">
 		<div class="bg-green">
 			<div class="flex jc-center p251251 w100">
