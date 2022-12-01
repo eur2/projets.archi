@@ -130,11 +130,11 @@
 	categoryPosts = posts.reduce(function (prev, post) {
 		return [...prev, post.acf.architecte];
 	}, []);
-	const architectes = [...new Set(categoryPosts)]
+	const architectesRaw = [...new Set(categoryPosts)]
 		.concat(architectes_as)
 		.sort()
 		.filter((n) => n);
-	// console.log(architectes);
+	const architectes = [...new Set(architectesRaw)];
 
 	categoryPosts = posts.reduce(function (prev, post) {
 		return [...prev, post.acf.amenageur];
