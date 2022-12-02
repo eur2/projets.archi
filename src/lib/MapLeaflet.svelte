@@ -31,13 +31,13 @@
 			var markers = window.L.markerClusterGroup();
 			for (var i = 0; i < filteredPosts.length; i++) {
 				var a = filteredPosts[i];
+				var id = a.id;
 				var title = a.acf.projet.name;
 				var arch = a.acf.architecte;
 				var maitre = a.acf.maitre;
 				var loca = a.acf.localisation;
 				var annee = a.acf.annee;
 				var img = a.acf.image0.sizes.medium;
-				var img1 = a.acf.image1.sizes['2048x2048'];
 				var myIcon = L.icon({
 					iconUrl: svg
 				});
@@ -48,8 +48,8 @@
 					loca: loca,
 					annee: annee,
 					img: img,
-					img1: img1,
-					icon: myIcon
+					icon: myIcon,
+					id: id
 				});
 				marker
 					.bindPopup(
@@ -72,9 +72,10 @@
 					<div class="sm">Année</div>
 					<div class="mb">
 						${annee}
-					</div><a rel="noreferrer" target="_blank" href=${img1}
+					</div>
+					<div><a href=#${id}
 						><img width="300px" src=${img} alt="alt" /></a
-					>`,
+					></div>`,
 						{ maxWidth: 270 }
 					)
 					.openPopup();

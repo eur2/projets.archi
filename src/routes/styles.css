@@ -309,9 +309,19 @@ article header:hover a, .eeee, .bg-grey {
 .marker-cluster div {
 	font: 16px 'Self Modern', serif !important;
 }
-/* #front:target{
+.target{
 	display: none;
-} */
+  }
+    .target:target{
+	  display: block;
+	  position: fixed;
+	  top: 0;
+	  left: 0;
+	  right: 0;
+	  bottom: 0;
+	  z-index: 100;
+	  overflow-y: auto;
+  } 
 @media only screen and (max-width: 960px) {
 	html{
 		font-size: 18px;
