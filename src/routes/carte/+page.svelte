@@ -17,7 +17,7 @@
 	<aside>
 		{#each filteredPosts as post}
 			<div class="target bg-green" id={post.id}>
-				<a href="#" class="fixed t0 l0 r0 center bg-green">×</a>
+				<a href="#index" class="fixed t0 l0 r0 center bg-green">×</a>
 				{#if post.acf.image1}
 					<img
 						class="w100"
