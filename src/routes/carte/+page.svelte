@@ -8,7 +8,7 @@
 	$: filteredPosts = posts;
 </script>
 
-<main>
+<main id="index">
 	<!-- <Map {filteredPosts} /> -->
 	<!-- <div id="map" /> -->
 
