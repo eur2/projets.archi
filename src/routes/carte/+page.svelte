@@ -1,10 +1,9 @@
 <script>
 	export let data;
 	const { posts } = data;
-	import MapLeaflet from '$lib/MapLeaflet.svelte';
+	import Map from '$lib/Map.svelte';
 	// import Select from '$lib/Select.svelte';
 	// import SelectGroup from '$lib/SelectGroup.svelte';
-
 	$: filteredPosts = posts;
 </script>
 
@@ -13,7 +12,7 @@
 	<!-- <div id="map" /> -->
 
 	<!-- <div id="map" bind:this={filteredPosts} /> -->
-	<MapLeaflet {filteredPosts} />
+	<Map {filteredPosts} />
 	<aside>
 		{#each filteredPosts as post}
 			<div class="target bg-green" id={post.id}>
