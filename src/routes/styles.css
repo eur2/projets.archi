@@ -334,6 +334,10 @@ article .flex{
 article header{
 	flex-wrap: wrap;
 }
+.flex5{
+	flex: 100%;
+
+}
 .header{
 	display: none;
 }
