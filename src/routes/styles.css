@@ -328,8 +328,11 @@ article header:hover a, .eeee, .bg-grey {
 	}
 }
  @media only screen and (max-width: 732px) {
-article header, article .flex{
+/* article header, article .flex{
 	display: block;
+} */
+article header{
+	flex-wrap: wrap;
 }
 .header{
 	display: none;
@@ -341,9 +344,9 @@ article header, article .flex{
 .thumb{
 	display:none;
 }
-.p-r{
+/* .p-r{
 	padding-right: 0;
-}
+} */
 .front{
 	max-width: 90%;
 }
