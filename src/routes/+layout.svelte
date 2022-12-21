@@ -15,21 +15,21 @@
 		class="p05 m025 bg-green border-radius"
 		class:current={$page.url.pathname === '/'}
 		aria-current={$page.url.pathname === '/' ? 'true' : 'false'}
-		data-sveltekit-prefetch>Index</a
+		data-sveltekit-preload-data="hover">Index</a
 	>
 	<a
 		href="/carte"
 		class="p05 m025 bg-green border-radius"
 		class:current={$page.url.pathname === '/carte'}
 		aria-current={$page.url.pathname === '/carte' ? 'true' : 'false'}
-		data-sveltekit-prefetch>Carte</a
+		data-sveltekit-preload-data="hover">Carte</a
 	>
 	<a
 		href="/info"
 		class="p05 m025 bg-green border-radius"
 		class:current={$page.url.pathname === '/info'}
 		aria-current={$page.url.pathname === '/info' ? 'true' : 'false'}
-		data-sveltekit-prefetch>Info</a
+		data-sveltekit-preload-data="hover">Info</a
 	>
 </nav>
 {#if $page.url.pathname === '/carte'}
