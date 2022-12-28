@@ -4,9 +4,9 @@
 		bet_structure,
 		bet_thermique,
 		bet_environnement,
-		bet_fluides,
-		acousticien,
-		economiste;
+		bet_fluide,
+		acousticiens,
+		economistes;
 </script>
 
 <!-- <details>
@@ -44,7 +44,7 @@
 			{/each}
 		</optgroup>
 		<optgroup label="BET Fluides">
-			{#each bet_fluides as value}
+			{#each bet_fluide as value}
 				<option value={value.toLowerCase()}>{value}</option>
 			{/each}
 		</optgroup>
@@ -54,12 +54,12 @@
 			{/each}
 		</optgroup>
 		<optgroup label="Economiste">
-			{#each economiste as value}
+			{#each economistes as value}
 				<option value={value.toLowerCase()}>{value}</option>
 			{/each}
 		</optgroup>
 		<optgroup label="Acousticien">
-			{#each acousticien as value}
+			{#each acousticiens as value}
 				<option value={value.toLowerCase()}>{value}</option>
 			{/each}
 		</optgroup>

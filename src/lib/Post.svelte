@@ -16,7 +16,7 @@
 	}
 </script>
 
-<article id={post.id} class="border-top">
+<article id={post.id} class="border-top content-visibility">
 	<header
 		on:click={handleToggle}
 		on:keydown={handleToggle}
