@@ -1,6 +1,6 @@
 <script>
 	export let data;
-	console.log(data);
+	// console.log(data);
 	const {
 		posts,
 		header,
@@ -95,6 +95,7 @@
 						post.acf.architecte.toLowerCase() === selectArchitecte ||
 						post.acf.architecte_associé.toLowerCase() === selectArchitecte) &&
 				  (selectMaitre === 'all' || post.acf.maitre.toLowerCase() === selectMaitre) &&
+				  (selectAmenageur === 'all' || post.acf.amenageur.toLowerCase() === selectAmenageur) &&
 				  (selectPaysagiste === 'all' || post.acf.paysagiste.toLowerCase() === selectPaysagiste) &&
 				  (selectBureauEtudes === 'all' ||
 						post.acf.acousticien.toLowerCase() === selectBureauEtudes ||
