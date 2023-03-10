@@ -1,6 +1,11 @@
 <script>
+	import { onMount, onDestroy } from 'svelte';
+	import leaflet from 'leaflet';
+	import 'leaflet.markercluster';
+	import svg from '$lib/marker.svg';
+
 	export let data;
-	// console.log(data);
+	// const { posts } = data;
 	const {
 		posts,
 		header,
@@ -23,15 +28,10 @@
 		acousticiens,
 		test
 	} = data;
-	import Splash from '$lib/Splash.svelte';
-	import Post from '$lib/Post.svelte';
+
 	import Select from '$lib/Select.svelte';
 	import SelectGroup from '$lib/SelectGroup.svelte';
-	import { splashOpen } from '$lib/store';
-	// import { cat } from '$lib/utils.js';
-	const closeSplash = () => {
-		splashOpen.set(false);
-	};
+
 	let visible;
 	function handleToggle() {
 		visible = !visible;
@@ -75,7 +75,6 @@
 					post.acf.eclairagiste.toLowerCase().indexOf(searchTerm) !== -1
 			)
 			.filter((post) =>
-				// selectMulti === [] &&
 				checkLaureat === false &&
 				selectAnnee === 'all' &&
 				selectLocalisation === 'all' &&
@@ -174,13 +173,72 @@
 					  (checkLaureat === false || post.acf.laureat === checkLaureat)
 			);
 	}
-</script>
 
-{#if $splashOpen}
-	<Splash {posts} on:close={closeSplash}>
-		{@html header.content.rendered}
-	</Splash>
-{/if}
+	let mapElement;
+	let map;
+	let mounted = false;
+	let currentMarkersGroup = null;
+
+	// const removePoint = () => {
+	// 	filteredPosts = filteredPosts.slice(0, -1);
+	// };
+
+	$: {
+		// console.log(filteredPosts);
+
+		// This makes sure we have run onMount already and initialized the map
+		if (mounted) {
+			// If we already have a group, we need to clean it up before creating a new one
+			if (currentMarkersGroup) {
+				map.removeLayer(currentMarkersGroup);
+			}
+
+			// Create a new group
+			currentMarkersGroup = leaflet.markerClusterGroup();
+
+			for (let i = 0; i < filteredPosts.length; i++) {
+				const a = filteredPosts[i];
+				const id = a.id;
+				const title = a.acf.projet.name;
+				const arch = a.acf.architecte;
+				const maitre = a.acf.maitre;
+				const loca = a.acf.localisation;
+				const annee = a.acf.annee;
+				const img = a.acf.image0.sizes.thumbnail;
+				const myIcon = leaflet.icon({
+					iconUrl: svg
+				});
+				const marker = leaflet.marker(new L.LatLng(a.acf.lat, a.acf.lon), {
+					title: title,
+					icon: myIcon
+				});
+				currentMarkersGroup.bindPopup(title);
+				currentMarkersGroup.addLayer(marker);
+			}
+
+			map.addLayer(currentMarkersGroup);
+		}
+	}
+
+	onMount(async () => {
+		map = leaflet.map(mapElement).setView([43.6506786, 1.4408547], 10);
+
+		leaflet
+			.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+				attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+			})
+			.addTo(map);
+
+		mounted = true;
+	});
+
+	onDestroy(async () => {
+		if (map) {
+			// console.log('Unloading Leaflet map.');
+			map.remove();
+		}
+	});
+</script>
 
 <aside class="fixed t0 l0 r0 z2 sm">
 	<div class="bg-green">
@@ -255,33 +313,18 @@
 			</div>
 		</div>
 	</div>
-	<div class="flex header bg-white" style="padding-bottom: 0;">
-		<div class="flex1 sm p-r">Année</div>
-		<div class="flex2 sm p-r">Localisation</div>
-		<div class="flex5 sm p-r">Projet</div>
-		<div class="flex2 sm p-r">Maître d'ouvrage</div>
-		<div class="flex2 sm p-r">Architecte</div>
-		<div style="visibility: hidden;">
-			<svg
-				class="w20"
-				class:rotate={visible === true}
-				stroke="currentColor"
-				fill="none"
-				stroke-width="2"
-				viewBox="0 0 24 24"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-				height="1em"
-				width="1em"
-				xmlns="http://www.w3.org/2000/svg"><polyline points="6 9 12 15 18 9" /></svg
-			>
-		</div>
-	</div>
 </aside>
-<main class="relativee bg-grey" style="margin-top:150px;min-heighttt:100vh;">
-	{#if filteredPosts.length}
-		{#each filteredPosts as post}
-			<Post {post} />
-		{/each}
-	{:else}<div class="center bg-white p">Aucun résultat :(</div>{/if}
+<main>
+	<!-- <input type="button" value="Remove point" on:click={removePoint} /> -->
+	<div bind:this={mapElement} />
 </main>
+
+<style>
+	@import 'https://unpkg.com/leaflet@1.9.3/dist/leaflet.css';
+	@import 'https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css';
+	@import 'https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css';
+	main div {
+		height: 800px;
+		z-index: 1;
+	}
+</style>

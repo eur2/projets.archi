@@ -306,7 +306,7 @@ article header:hover a, .eeee, .bg-grey {
     margin: .5em !important;
     line-height: 1.2 !important;
 }
-.marker-cluster-small, .marker-cluster-small div {
+.marker-cluster, .marker-cluster div {
 	background-color: rgb(36, 252, 131) !important;
 }
 .marker-cluster div {

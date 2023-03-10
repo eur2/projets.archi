@@ -180,6 +180,24 @@ export const load = async () => {
 			)
 		]
 			.sort()
+			.filter((n) => n),
+		test: [
+			'a',
+			'b',
+			'c'
+			// ...new Set(
+			// 	posts.reduce(function (prev, post) {
+			// 		return [...prev, post.acf.test];
+			// 	}, [])
+
+			// )
+			// ...new Set(
+			// 	posts.map(function (post) {
+			// 		return post.acf.test;
+			// 	})
+			// )
+		]
+			.sort()
 			.filter((n) => n)
 	};
 };
