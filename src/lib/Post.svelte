@@ -44,7 +44,8 @@
 					{post.acf.budget}
 				</div> -->
 				<div class="sm tag" class:bg-fbfbfb={visible === true}>
-					{post.acf.type}
+					{post.acf.types[0]}<br />{#if post.acf.types[1]}
+						{post.acf.types[1]}<br />{/if}{#if post.acf.types[2]} {post.acf.types[2]}<br />{/if}
 				</div>
 				<div class="sm tag" class:bg-fbfbfb={visible === true}>
 					{post.acf.structure}
@@ -85,7 +86,7 @@
 		</div>
 	</header>
 	{#if hovering}
-		<div class="absolute z5 thumb" class:none={visible === true}>
+		<div class="absolute z3 thumb" class:none={visible === true}>
 			{#if post.acf.image0}
 				<img src={post.acf.image0.sizes.medium} width="300" alt="alt" />
 			{/if}
@@ -174,9 +175,16 @@
 						<div class="mb">{post.acf.amenageur}</div>
 					</div>
 				{/if}
+				<!-- <div>
+					<div class="sm">Type</div>
+					<div class="mb">{post.acf.types.join(', ')}</div>
+				</div> -->
 				<div>
 					<div class="sm">Type</div>
-					<div class="mb">{post.acf.type}</div>
+					<div class="mb">
+						{post.acf.types[0]}<br />{#if post.acf.types[1]}
+							{post.acf.types[1]}<br />{/if}{#if post.acf.types[2]} {post.acf.types[2]}<br />{/if}
+					</div>
 				</div>
 				<div>
 					<div class="sm">Localisation</div>

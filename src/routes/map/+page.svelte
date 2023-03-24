@@ -1,5 +1,6 @@
 <script>
 	import { onMount, onDestroy } from 'svelte';
+	import { browser } from '$app/environment';
 	import leaflet from 'leaflet';
 	import 'leaflet.markercluster';
 	import svg from '$lib/marker.svg';
@@ -183,44 +184,9 @@
 	// 	filteredPosts = filteredPosts.slice(0, -1);
 	// };
 
-	$: {
-		// console.log(filteredPosts);
-
-		// This makes sure we have run onMount already and initialized the map
-		if (mounted) {
-			// If we already have a group, we need to clean it up before creating a new one
-			if (currentMarkersGroup) {
-				map.removeLayer(currentMarkersGroup);
-			}
-
-			// Create a new group
-			currentMarkersGroup = leaflet.markerClusterGroup();
-
-			for (let i = 0; i < filteredPosts.length; i++) {
-				const a = filteredPosts[i];
-				const id = a.id;
-				const title = a.acf.projet.name;
-				const arch = a.acf.architecte;
-				const maitre = a.acf.maitre;
-				const loca = a.acf.localisation;
-				const annee = a.acf.annee;
-				const img = a.acf.image0.sizes.thumbnail;
-				const myIcon = leaflet.icon({
-					iconUrl: svg
-				});
-				const marker = leaflet.marker(new L.LatLng(a.acf.lat, a.acf.lon), {
-					title: title,
-					icon: myIcon
-				});
-				currentMarkersGroup.bindPopup(title);
-				currentMarkersGroup.addLayer(marker);
-			}
-
-			map.addLayer(currentMarkersGroup);
-		}
-	}
-
 	onMount(async () => {
+		const leaflet = await import('leaflet');
+		await import('leaflet.markercluster');
 		map = leaflet.map(mapElement).setView([43.6506786, 1.4408547], 10);
 
 		leaflet
@@ -238,6 +204,43 @@
 			map.remove();
 		}
 	});
+	$: {
+		// console.log(filteredPosts);
+		// This makes sure we have run onMount already and initialized the map
+		if (mounted) {
+			// If we already have a group, we need to clean it up before creating a new one
+			if (currentMarkersGroup) {
+				map.removeLayer(currentMarkersGroup);
+			}
+
+			// Create a new group
+			currentMarkersGroup = leaflet.markerClusterGroup();
+
+			for (let i = 0; i < filteredPosts.length; i++) {
+				const a = filteredPosts[i];
+				const id = a.id;
+				const title = a.acf.projet.name;
+				const arch = a.acf.architecte;
+				// const maitre = a.acf.maitre;
+				// const loca = a.acf.localisation;
+				// const annee = a.acf.annee;
+				// const img = a.acf.image0.sizes.thumbnail;
+				const myIcon = leaflet.icon({
+					iconUrl: svg
+				});
+				const marker = leaflet.marker(new leaflet.LatLng(a.acf.lat, a.acf.lon), {
+					title: title,
+					id: id,
+					arch: arch,
+					icon: myIcon
+				});
+				marker.bindPopup(arch);
+				currentMarkersGroup.addLayer(marker);
+			}
+
+			map.addLayer(currentMarkersGroup);
+		}
+	}
 </script>
 
 <aside class="fixed t0 l0 r0 z2 sm">

@@ -55,13 +55,13 @@ export const load = async () => {
 				}, [])
 			)
 		].sort(),
-		types: [
-			...new Set(
-				posts.reduce(function (prev, post) {
-					return [...prev, post.acf.type];
-				}, [])
-			)
-		].sort(),
+		// types: [
+		// 	...new Set(
+		// 		posts.reduce(function (prev, post) {
+		// 			return [...prev, post.acf.type];
+		// 		}, [])
+		// 	)
+		// ].sort(),
 		localisations: [
 			...new Set(
 				posts.reduce(function (prev, post) {
@@ -181,23 +181,17 @@ export const load = async () => {
 		]
 			.sort()
 			.filter((n) => n),
-		test: [
-			'a',
-			'b',
-			'c'
-			// ...new Set(
-			// 	posts.reduce(function (prev, post) {
-			// 		return [...prev, post.acf.test];
-			// 	}, [])
-
-			// )
-			// ...new Set(
-			// 	posts.map(function (post) {
-			// 		return post.acf.test;
-			// 	})
-			// )
+		types: [
+			...new Set(
+				posts.reduce(function (prev, post) {
+					return [...prev, post.acf.types];
+				}, [])
+			)
 		]
+			.flat()
+			.filter((value, index, self) => {
+				return self.indexOf(value) === index;
+			})
 			.sort()
-			.filter((n) => n)
 	};
 };

@@ -1,10 +1,13 @@
 <script>
 	export let data;
-	// console.log(data);
+	import { setMap } from '$lib/useMap';
+	// import Select from '$lib/Select.svelte';
+	// import SelectGroup from '$lib/SelectGroup.svelte';
 	const {
 		posts,
 		header,
 		years,
+		types,
 		localisations,
 		structures,
 		surfaces,
@@ -20,29 +23,23 @@
 		economistes,
 		paysagistes,
 		acousticiens,
-		types
+		test
 	} = data;
-	import Splash from '$lib/Splash.svelte';
-	import Post from '$lib/Post.svelte';
+
 	import Select from '$lib/Select.svelte';
-	// import selectTypeMulti from '$lib/selectTypeMulti.svelte';
 	import SelectGroup from '$lib/SelectGroup.svelte';
-	import { splashOpen } from '$lib/store';
-	// import { cat } from '$lib/utils.js';
-	const closeSplash = () => {
-		splashOpen.set(false);
-	};
+
 	let visible;
 	function handleToggle() {
 		visible = !visible;
 	}
 
 	let searchTerm = '';
-	let selectTypeMulti = [];
+	let selectMulti = [];
 	let checkLaureat = false;
 	let selectLocalisation,
 		selectAnnee,
-		// selectType,
+		selectType,
 		selectStructure,
 		selectSurface,
 		selectBudget,
@@ -53,7 +50,7 @@
 		selectBureauEtudes = 'all';
 	let filteredPosts = [];
 
-	$: if (selectTypeMulti.length === 0) {
+	$: if (selectMulti.length === 0) {
 		filteredPosts = posts
 			.filter(
 				(post) =>
@@ -75,11 +72,10 @@
 					post.acf.eclairagiste.toLowerCase().indexOf(searchTerm) !== -1
 			)
 			.filter((post) =>
-				// selectTypeMulti === [] &&
 				checkLaureat === false &&
 				selectAnnee === 'all' &&
 				selectLocalisation === 'all' &&
-				// selectType === 'all' &&
+				selectType === 'all' &&
 				selectStructure === 'all' &&
 				selectSurface === 'all' &&
 				selectBudget === 'all' &&
@@ -92,7 +88,7 @@
 					: (selectAnnee === 'all' || post.acf.annee == selectAnnee) &&
 					  (selectLocalisation === 'all' ||
 							post.acf.localisation.toLowerCase() === selectLocalisation) &&
-					  //   (selectType === 'all' || post.acf.type.toLowerCase() === selectType) &&
+					  (selectType === 'all' || post.acf.type.toLowerCase() === selectType) &&
 					  (selectStructure === 'all' || post.acf.structure.toLowerCase() === selectStructure) &&
 					  (selectSurface === 'all' || post.acf.surface.toLowerCase() === selectSurface) &&
 					  (selectBudget === 'all' || post.acf.budget.toLowerCase() === selectBudget) &&
@@ -115,9 +111,7 @@
 			);
 	} else {
 		filteredPosts = posts
-			.filter(
-				(post) => post.acf.types && post.acf.types.some((value) => selectTypeMulti.includes(value))
-			)
+			.filter((post) => post.acf.test && post.acf.test.some((value) => selectMulti.includes(value)))
 			.filter(
 				(post) =>
 					post.acf.projet.name.toLowerCase().indexOf(searchTerm) !== -1 ||
@@ -141,7 +135,7 @@
 				checkLaureat === false &&
 				selectAnnee === 'all' &&
 				selectLocalisation === 'all' &&
-				// selectType === 'all' &&
+				selectType === 'all' &&
 				selectStructure === 'all' &&
 				selectSurface === 'all' &&
 				selectBudget === 'all' &&
@@ -154,7 +148,7 @@
 					: (selectAnnee === 'all' || post.acf.annee == selectAnnee) &&
 					  (selectLocalisation === 'all' ||
 							post.acf.localisation.toLowerCase() === selectLocalisation) &&
-					  //   (selectType === 'all' || post.acf.type.toLowerCase() === selectType) &&
+					  (selectType === 'all' || post.acf.type.toLowerCase() === selectType) &&
 					  (selectStructure === 'all' || post.acf.structure.toLowerCase() === selectStructure) &&
 					  (selectSurface === 'all' || post.acf.surface.toLowerCase() === selectSurface) &&
 					  (selectBudget === 'all' || post.acf.budget.toLowerCase() === selectBudget) &&
@@ -178,120 +172,143 @@
 	}
 </script>
 
-{#if $splashOpen}
-	<Splash {posts} on:close={closeSplash}>
-		{@html header.content.rendered}
-	</Splash>
-{/if}
-
-<aside class="fixed t0 l0 r0 z4 sm">
-	<div class="bg-green">
-		<div class="flex jc-center p251251 w100">
-			<button class="w150" on:click={handleToggle}>{!visible ? '× Filtres' : 'Filtres'}</button>
-			<form role="search">
-				<input
-					class="center w150"
-					type="text"
-					name="search"
-					aria-label="Search"
-					placeholder="Recherche"
-					bind:value={searchTerm}
-				/>
-			</form>
-		</div>
-		<div class="p251251 wrap {!visible ? 'flex' : 'none'}" style="padding-top: 0;">
-			<Select id="annee" label="Année" values={years} bind:value={selectAnnee} />
-			<Select
-				id="localisation"
-				label="Localisation"
-				values={localisations}
-				bind:value={selectLocalisation}
-			/>
-			<!-- <Select id="type" label="Type" values={types} bind:value={selectType} /> -->
-			<Select id="structure" label="Structure" values={structures} bind:value={selectStructure} />
-			<Select id="surface" label="Surface" values={surfaces} bind:value={selectSurface} />
-			<Select id="budget" label="Budget" values={budgets} bind:value={selectBudget} />
-
-			<Select
-				id="architecte"
-				label="Architecte"
-				values={architectes}
-				bind:value={selectArchitecte}
-			/>
-			<Select
-				id="paysagiste"
-				label="Paysagiste"
-				values={paysagistes}
-				bind:value={selectPaysagiste}
-			/>
-			<SelectGroup
-				{bet_general}
-				{bet_structure}
-				{bet_environnement}
-				{bet_fluide}
-				{bet_thermique}
-				{economistes}
-				{acousticiens}
-				bind:value={selectBureauEtudes}
-			/>
-
-			<Select id="maitre" label="Maître d'ouvrage" values={maitres} bind:value={selectMaitre} />
-			<Select id="amenageur" label="Aménageur" values={amenageurs} bind:value={selectAmenageur} />
-			<div class="p025">
-				<label for="laureat">Lauréat</label>
-				<input
-					type="checkbox"
-					id="laureat"
-					name="laureat"
-					class="bg-green"
-					bind:checked={checkLaureat}
-				/>
+<main id="index">
+	<aside class="fixed t0 l0 r0 z2 sm">
+		<div class="bg-green">
+			<div class="flex jc-center p251251 w100">
+				<button class="w150" on:click={handleToggle}>{!visible ? '× Filtres' : 'Filtres'}</button>
+				<form role="search">
+					<input
+						class="center w150"
+						type="text"
+						name="search"
+						aria-label="Search"
+						placeholder="Recherche"
+						bind:value={searchTerm}
+					/>
+				</form>
 			</div>
-			<!-- <selectTypeMulti id="typeMulti" label="Type" values={typeMulti} bind:group={selectTypeMulti} /> -->
+			<div class="p251251 wrap {!visible ? 'flex' : 'none'}" style="padding-top: 0;">
+				<Select id="annee" label="Année" values={years} bind:value={selectAnnee} />
+				<Select
+					id="localisation"
+					label="Localisation"
+					values={localisations}
+					bind:value={selectLocalisation}
+				/>
+				<Select id="type" label="Type" values={types} bind:value={selectType} />
+				<Select id="structure" label="Structure" values={structures} bind:value={selectStructure} />
+				<Select id="surface" label="Surface" values={surfaces} bind:value={selectSurface} />
+				<Select id="budget" label="Budget" values={budgets} bind:value={selectBudget} />
 
-			<div class="p025">
-				Type :
-				{#each types as value}
-					<label for={value} class="m-r"
-						><input
-							type="checkbox"
-							id={value}
-							name={value}
-							bind:group={selectTypeMulti}
-							{value}
-						/>{value}</label
-					>
-				{/each}
+				<Select
+					id="architecte"
+					label="Architecte"
+					values={architectes}
+					bind:value={selectArchitecte}
+				/>
+				<Select
+					id="paysagiste"
+					label="Paysagiste"
+					values={paysagistes}
+					bind:value={selectPaysagiste}
+				/>
+				<SelectGroup
+					{bet_general}
+					{bet_structure}
+					{bet_environnement}
+					{bet_fluide}
+					{bet_thermique}
+					{economistes}
+					{acousticiens}
+					bind:value={selectBureauEtudes}
+				/>
+
+				<Select id="maitre" label="Maître d'ouvrage" values={maitres} bind:value={selectMaitre} />
+				<Select id="amenageur" label="Aménageur" values={amenageurs} bind:value={selectAmenageur} />
+				<div class="p025">
+					<label for="laureat">Lauréat</label>
+					<input
+						type="checkbox"
+						id="laureat"
+						name="laureat"
+						class="bg-green"
+						bind:checked={checkLaureat}
+					/>
+				</div>
+				<div>
+					<label for="multi">Multi</label>
+					<select name="multi" id="multi" multiple bind:value={selectMulti}>
+						<option value="a">a</option>
+						<option value="b">b</option>
+						<option value="c">c</option>
+					</select>
+				</div>
 			</div>
 		</div>
-	</div>
-	<div class="flex header bg-white" style="padding-bottom: 0;">
-		<div class="flex1 sm p-r">Année</div>
-		<div class="flex2 sm p-r">Localisation</div>
-		<div class="flex5 sm p-r">Projet</div>
-		<div class="flex2 sm p-r">Maître d'ouvrage</div>
-		<div class="flex2 sm p-r">Architecte</div>
-		<div style="visibility: hidden;">
-			<svg
-				class="w20"
-				class:rotate={visible === true}
-				stroke="currentColor"
-				fill="none"
-				stroke-width="2"
-				viewBox="0 0 24 24"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-				height="1em"
-				width="1em"
-				xmlns="http://www.w3.org/2000/svg"><polyline points="6 9 12 15 18 9" /></svg
-			>
-		</div>
-	</div>
-</aside>
-<main class="relativee bg-grey" style="margin-top:150px;min-heighttt:100vh;">
-	{#if filteredPosts.length}
+	</aside>
+
+	<div
+		id="map"
+		use:setMap={{
+			posts: filteredPosts,
+			latitude: 43.6506786,
+			longitude: 1.4408547,
+			zoom: 10
+		}}
+	/>
+	<aside>
 		{#each filteredPosts as post}
-			<Post {post} />
+			<div class="target bg-green" id={post.id}>
+				<a href="#index" class="fixed t0 l0 r0 center bg-green">×</a>
+				{#if post.acf.image1}
+					<img
+						class="w100"
+						src={post.acf.image1.sizes.large}
+						srcset="{post.acf.image1.sizes.medium} 400w, {post.acf.image1.sizes.large} 800w, {post
+							.acf.image1.sizes['2048x2048']} 1600w"
+						width="800"
+						height="600"
+						alt="alt"
+					/>
+				{/if}
+				{#if post.acf.image2}
+					<img
+						class="w100"
+						src={post.acf.image2.sizes.medium}
+						srcset="{post.acf.image2.sizes.medium} 400w, {post.acf.image2.sizes.large} 800w, {post
+							.acf.image2.sizes['2048x2048']} 1600w"
+						width="800"
+						height="600"
+						alt="alt"
+					/>
+				{/if}
+				{#if post.acf.image3}
+					<img
+						class="w100"
+						src={post.acf.image3.sizes.medium}
+						srcset="{post.acf.image3.sizes.medium} 400w, {post.acf.image3.sizes.large} 800w, {post
+							.acf.image3.sizes['2048x2048']} 1600w"
+						width="800"
+						height="600"
+						alt="alt"
+					/>
+				{/if}
+			</div>
 		{/each}
-	{:else}<div class="center bg-white p">Aucun résultat :(</div>{/if}
+	</aside>
 </main>
+
+<style>
+	@import 'leaflet/dist/leaflet.css';
+	@import 'leaflet.markercluster/dist/MarkerCluster.css';
+	@import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
+	#map {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		height: 100%;
+	}
+</style>

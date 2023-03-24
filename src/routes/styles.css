@@ -231,6 +231,9 @@ article header:hover a, .eeee, .bg-grey {
 .p-r{
 	padding-right: 2rem;
 }
+.m-r{
+	margin-right: 1em;
+}
 .flex1 {
 	flex: 1;
 }
