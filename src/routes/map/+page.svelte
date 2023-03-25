@@ -1,8 +1,8 @@
 <script>
 	import { onMount, onDestroy } from 'svelte';
-	import { browser } from '$app/environment';
-	import leaflet from 'leaflet';
-	import 'leaflet.markercluster';
+	// import { browser } from '$app/environment';
+	// import leaflet from 'leaflet';
+	// import 'leaflet.markercluster';
 	import svg from '$lib/marker.svg';
 
 	export let data;
@@ -185,15 +185,17 @@
 	// };
 
 	onMount(async () => {
-		const leaflet = await import('leaflet');
-		await import('leaflet.markercluster');
-		map = leaflet.map(mapElement).setView([43.6506786, 1.4408547], 10);
+		const L = await import('leaflet');
+		const { MarkerClusterGroup } = await import('leaflet.markercluster');
 
-		leaflet
-			.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-				attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-			})
-			.addTo(map);
+		// await import('leaflet.markercluster');
+		console.log(L);
+
+		map = L.map(mapElement).setView([43.6506786, 1.4408547], 10);
+
+		L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+			attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+		}).addTo(map);
 
 		mounted = true;
 	});
@@ -208,13 +210,14 @@
 		// console.log(filteredPosts);
 		// This makes sure we have run onMount already and initialized the map
 		if (mounted) {
+			// const L = window['L'];
 			// If we already have a group, we need to clean it up before creating a new one
 			if (currentMarkersGroup) {
 				map.removeLayer(currentMarkersGroup);
 			}
 
 			// Create a new group
-			currentMarkersGroup = leaflet.markerClusterGroup();
+			currentMarkersGroup = L.markerClusterGroup();
 
 			for (let i = 0; i < filteredPosts.length; i++) {
 				const a = filteredPosts[i];
@@ -225,10 +228,10 @@
 				// const loca = a.acf.localisation;
 				// const annee = a.acf.annee;
 				// const img = a.acf.image0.sizes.thumbnail;
-				const myIcon = leaflet.icon({
+				const myIcon = L.icon({
 					iconUrl: svg
 				});
-				const marker = leaflet.marker(new leaflet.LatLng(a.acf.lat, a.acf.lon), {
+				const marker = L.marker(new L.LatLng(a.acf.lat, a.acf.lon), {
 					title: title,
 					id: id,
 					arch: arch,

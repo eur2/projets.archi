@@ -1,0 +1,79 @@
+{
+	"version": 3,
+	"routes": [
+		{
+			"src": "/carte1",
+			"dest": "/carte1/"
+		},
+		{
+			"src": "/carte1/",
+			"status": 308,
+			"headers": {
+				"Location": "/carte1"
+			}
+		},
+		{
+			"src": "/carte",
+			"dest": "/carte/"
+		},
+		{
+			"src": "/carte/",
+			"status": 308,
+			"headers": {
+				"Location": "/carte"
+			}
+		},
+		{
+			"src": "/info",
+			"dest": "/info/"
+		},
+		{
+			"src": "/info/",
+			"status": 308,
+			"headers": {
+				"Location": "/info"
+			}
+		},
+		{
+			"src": "/map",
+			"dest": "/map/"
+		},
+		{
+			"src": "/map/",
+			"status": 308,
+			"headers": {
+				"Location": "/map"
+			}
+		},
+		{
+			"src": "/_app/immutable/.+",
+			"headers": {
+				"cache-control": "public, immutable, max-age=31536000"
+			}
+		},
+		{
+			"handle": "filesystem"
+		},
+		{
+			"src": "/.*",
+			"dest": "/fn"
+		}
+	],
+	"overrides": {
+		"index.html": {
+			"path": ""
+		},
+		"carte1.html": {
+			"path": "carte1"
+		},
+		"carte.html": {
+			"path": "carte"
+		},
+		"info.html": {
+			"path": "info"
+		},
+		"map.html": {
+			"path": "map"
+		}
+	}
+}
