@@ -288,7 +288,7 @@
 		</div>
 	</div>
 </aside>
-<main class="relativee bg-grey" style="margin-top:150px;min-heighttt:100vh;">
+<main class="relativee bg-grey" style="margin-top:150px;">
 	{#if filteredPosts.length}
 		{#each filteredPosts as post}
 			<Post {post} />
