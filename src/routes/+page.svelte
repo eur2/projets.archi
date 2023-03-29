@@ -184,87 +184,77 @@
 	</Splash>
 {/if}
 
-<aside class="fixed t0 l0 r0 z4 sm">
-	<div class="bg-green">
-		<div class="flex jc-center p251251 w100">
-			<button class="w150" on:click={handleToggle}>{!visible ? '× Filtres' : 'Filtres'}</button>
-			<form role="search">
-				<input
-					class="center w150"
-					type="text"
-					name="search"
-					aria-label="Search"
-					placeholder="Recherche"
-					bind:value={searchTerm}
-				/>
-			</form>
+<aside class="fixed b0 r0 z4 sm bg-green" style="width: 25%;">
+	<div class="flex jc-center p251251 w100">
+		<button class="w150" on:click={handleToggle}>{!visible ? '× Filtres' : 'Filtres'}</button>
+		<form role="search">
+			<input
+				class="center w150"
+				type="text"
+				name="search"
+				aria-label="Search"
+				placeholder="Recherche"
+				bind:value={searchTerm}
+			/>
+		</form>
+	</div>
+	<div class="p251251 wrap {!visible ? 'flex' : 'none'}" style="padding-top: 0;">
+		<Select id="annee" label="Année" values={years} bind:value={selectAnnee} />
+		<Select
+			id="localisation"
+			label="Localisation"
+			values={localisations}
+			bind:value={selectLocalisation}
+		/>
+		<!-- <Select id="type" label="Type" values={types} bind:value={selectType} /> -->
+		<Select id="structure" label="Structure" values={structures} bind:value={selectStructure} />
+		<Select id="surface" label="Surface" values={surfaces} bind:value={selectSurface} />
+		<Select id="budget" label="Budget" values={budgets} bind:value={selectBudget} />
+
+		<Select id="architecte" label="Architecte" values={architectes} bind:value={selectArchitecte} />
+		<Select id="paysagiste" label="Paysagiste" values={paysagistes} bind:value={selectPaysagiste} />
+		<SelectGroup
+			{bet_general}
+			{bet_structure}
+			{bet_environnement}
+			{bet_fluide}
+			{bet_thermique}
+			{economistes}
+			{acousticiens}
+			bind:value={selectBureauEtudes}
+		/>
+
+		<Select id="maitre" label="Maître d'ouvrage" values={maitres} bind:value={selectMaitre} />
+		<Select id="amenageur" label="Aménageur" values={amenageurs} bind:value={selectAmenageur} />
+		<div class="p025">
+			<label for="laureat">Lauréat</label>
+			<input
+				type="checkbox"
+				id="laureat"
+				name="laureat"
+				class="bg-green"
+				bind:checked={checkLaureat}
+			/>
 		</div>
-		<div class="p251251 wrap {!visible ? 'flex' : 'none'}" style="padding-top: 0;">
-			<Select id="annee" label="Année" values={years} bind:value={selectAnnee} />
-			<Select
-				id="localisation"
-				label="Localisation"
-				values={localisations}
-				bind:value={selectLocalisation}
-			/>
-			<!-- <Select id="type" label="Type" values={types} bind:value={selectType} /> -->
-			<Select id="structure" label="Structure" values={structures} bind:value={selectStructure} />
-			<Select id="surface" label="Surface" values={surfaces} bind:value={selectSurface} />
-			<Select id="budget" label="Budget" values={budgets} bind:value={selectBudget} />
+		<!-- <selectTypeMulti id="typeMulti" label="Type" values={typeMulti} bind:group={selectTypeMulti} /> -->
 
-			<Select
-				id="architecte"
-				label="Architecte"
-				values={architectes}
-				bind:value={selectArchitecte}
-			/>
-			<Select
-				id="paysagiste"
-				label="Paysagiste"
-				values={paysagistes}
-				bind:value={selectPaysagiste}
-			/>
-			<SelectGroup
-				{bet_general}
-				{bet_structure}
-				{bet_environnement}
-				{bet_fluide}
-				{bet_thermique}
-				{economistes}
-				{acousticiens}
-				bind:value={selectBureauEtudes}
-			/>
-
-			<Select id="maitre" label="Maître d'ouvrage" values={maitres} bind:value={selectMaitre} />
-			<Select id="amenageur" label="Aménageur" values={amenageurs} bind:value={selectAmenageur} />
-			<div class="p025">
-				<label for="laureat">Lauréat</label>
-				<input
-					type="checkbox"
-					id="laureat"
-					name="laureat"
-					class="bg-green"
-					bind:checked={checkLaureat}
-				/>
-			</div>
-			<!-- <selectTypeMulti id="typeMulti" label="Type" values={typeMulti} bind:group={selectTypeMulti} /> -->
-
-			<div class="p025">
-				Type :
-				{#each types as value}
-					<label for={value} class="m-r"
-						><input
-							type="checkbox"
-							id={value}
-							name={value}
-							bind:group={selectTypeMulti}
-							{value}
-						/>{value}</label
-					>
-				{/each}
-			</div>
+		<div class="p025">
+			Type :
+			{#each types as value}
+				<label for={value} class="m-r"
+					><input
+						type="checkbox"
+						id={value}
+						name={value}
+						bind:group={selectTypeMulti}
+						{value}
+					/>{value}</label
+				>
+			{/each}
 		</div>
 	</div>
+</aside>
+<main class="relativee bg-grey">
 	<div class="flex header bg-white" style="padding-bottom: 0;">
 		<div class="flex1 sm p-r">Année</div>
 		<div class="flex2 sm p-r">Localisation</div>
@@ -287,8 +277,6 @@
 			>
 		</div>
 	</div>
-</aside>
-<main class="relativee bg-grey" style="margin-top:150px;min-heighttt:100vh;">
 	{#if filteredPosts.length}
 		{#each filteredPosts as post}
 			<Post {post} />

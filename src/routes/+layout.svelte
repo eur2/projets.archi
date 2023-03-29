@@ -8,28 +8,30 @@
 <svelte:head>
 	<title>Projets: plateforme de publication des concours et consultations d’architecture</title>
 </svelte:head>
-<nav class="fixed b0 l0 r0 z5 flex jc-center">
-	<a
-		href="/"
-		class="p05 m025 bg-green border-radius"
-		class:current={$page.url.pathname === '/'}
-		aria-current={$page.url.pathname === '/' ? 'true' : 'false'}
-		data-sveltekit-preload-data="hover">Index</a
-	>
-	<a
-		href="/carte"
-		class="p05 m025 bg-green border-radius"
-		class:current={$page.url.pathname === '/carte'}
-		aria-current={$page.url.pathname === '/carte' ? 'true' : 'false'}
-		data-sveltekit-preload-data="hover">Carte</a
-	>
-	<a
-		href="/info"
-		class="p05 m025 bg-green border-radius"
-		class:current={$page.url.pathname === '/info'}
-		aria-current={$page.url.pathname === '/info' ? 'true' : 'false'}
-		data-sveltekit-preload-data="hover">Info</a
-	>
+<nav class="fixed b0 l0 z4 sm bg-green">
+	<div class="flex jc-center p251251 w100">
+		<a
+			href="/"
+			class="p05m025bg-greenborder-radius"
+			class:current={$page.url.pathname === '/'}
+			aria-current={$page.url.pathname === '/' ? 'true' : 'false'}
+			data-sveltekit-preload-data="hover">Index</a
+		>
+		<a
+			href="/carte"
+			class="p05m025bg-greenborder-radius"
+			class:current={$page.url.pathname === '/carte'}
+			aria-current={$page.url.pathname === '/carte' ? 'true' : 'false'}
+			data-sveltekit-preload-data="hover">Carte</a
+		>
+		<a
+			href="/info"
+			class="p05m025bg-greenborder-radius"
+			class:current={$page.url.pathname === '/info'}
+			aria-current={$page.url.pathname === '/info' ? 'true' : 'false'}
+			data-sveltekit-preload-data="hover">Info</a
+		>
+	</div>
 </nav>
 {#if $page.url.pathname === '/carte'}
 	<slot />
