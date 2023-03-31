@@ -15,6 +15,15 @@ html {
 	height: 100%;
 	/* scroll-behavior: smooth; */
 }
+body{
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+footer{
+	margin-top: auto;
+
+}
 a,
 a:active {
 	color: black;
@@ -231,8 +240,14 @@ article header:hover a, .eeee, .bg-grey {
 .p-r{
 	padding-right: 2rem;
 }
-.m-r{
+.mr-1{
 	margin-right: 1em;
+}
+.mr-50{
+	margin-right: 40px;
+}
+.mr-150{
+	margin-right: 150px;
 }
 .flex1 {
 	flex: 1;
@@ -267,7 +282,12 @@ article header:hover a, .eeee, .bg-grey {
 .border-radius{
 	border-radius: 1em;
 }
-
+.h-100vh{
+	height: 100vh;
+}
+.overflow-y{
+	overflow-y: auto;
+}
 /* .hyphens {
 	overflow-wrap: break-word;
 	word-wrap: break-word;

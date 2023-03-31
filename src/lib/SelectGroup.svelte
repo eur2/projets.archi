@@ -24,7 +24,7 @@
 	</select>
 </div> -->
 
-<div class="p025">
+<div class="p025 flex column">
 	<label for="bureaux">Bureaux d'études</label>
 	<select name="bureaux" id="bureaux" class="bg-green" bind:value>
 		<option value="all" />

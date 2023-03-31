@@ -8,7 +8,7 @@
 <svelte:head>
 	<title>Projets: plateforme de publication des concours et consultations d’architecture</title>
 </svelte:head>
-<nav class="fixed b0 l0 z4 sm bg-green">
+<!-- <nav class="fixed b0 l0 z4 sm bg-green">
 	<div class="flex jc-center p251251 w100">
 		<a
 			href="/"
@@ -32,14 +32,14 @@
 			data-sveltekit-preload-data="hover">Info</a
 		>
 	</div>
-</nav>
+</nav> -->
 {#if $page.url.pathname === '/carte'}
 	<slot />
 {:else}
 	<slot />
-	<footer class="relativeee center bg-grey p">
+	<footer class="center eeeee bg-fbfbfb p">
 		<!-- <Logo /> -->
-		<div style="max-width: 100px;">
+		<div class="fixed t0 l0 p025" style="max-width: 100px;">
 			<a href="https://maop.fr/" target="_blank" rel="noreferrer">
 				<svg
 					data-name="Logo MAOP"
@@ -68,6 +68,5 @@
 		</div>
 
 		{@html footer.content.rendered}
-		<br />
 	</footer>
 {/if}

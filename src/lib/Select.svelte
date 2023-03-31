@@ -7,7 +7,7 @@
 	Something small enough to escape casual notice.
 </details> -->
 
-<div class="p025">
+<div class="p025 flex column">
 	<label for={id}>{label}</label>
 	<select {id} class="bg-green" bind:value>
 		<option value="all" />

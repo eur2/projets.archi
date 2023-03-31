@@ -22,14 +22,13 @@
 		on:keydown={handleToggle}
 		on:mouseenter={enter}
 		on:mouseleave={leave}
-		class={visible ? 'sticky t0 eeee z4 pointer' : 'bg-white pointer'}
-		style="padding-bottom:2em;"
+		class={visible ? 'eeee z4 pointer' : 'bg-white pointer'}
 	>
 		<div class="flex1 p-r">{post.acf.annee}</div>
 		<div class="flex2 p-r">{post.acf.localisation}</div>
 		<div class="flex5 p-r">
 			<div>{post.acf.projet.name}</div>
-			<div class="inlineflex ">
+			<div class="inlineflex">
 				<!-- {#if laureat === true}<div class="sm tag">laureat</div>{:else}{/if} -->
 				<!-- <div class="sm tag" class:selected={isTypeSelect === true}>
 					{post.acf.type}
@@ -213,7 +212,7 @@
 					</div>
 				{/if}
 			</div>
-			<div class="p flex1">
+			<div class="p flex2">
 				<div>
 					<div class="sm">Description</div>
 					<div class="mb">{post.acf.description}</div>

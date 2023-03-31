@@ -184,21 +184,31 @@
 	</Splash>
 {/if}
 
-<aside class="fixed b0 r0 z4 sm bg-green" style="width: 25%;">
-	<div class="flex jc-center p251251 w100">
-		<button class="w150" on:click={handleToggle}>{!visible ? '× Filtres' : 'Filtres'}</button>
-		<form role="search">
-			<input
-				class="center w150"
-				type="text"
-				name="search"
-				aria-label="Search"
-				placeholder="Recherche"
-				bind:value={searchTerm}
-			/>
-		</form>
+<aside class="fixed b0 t0 r0 z4 sm bg-green p025 overflow-y">
+	<div class="flex jc-center p025555">
+		<button on:click={handleToggle} class={!visible ? '' : 'h-100vh flex'}
+			>{!visible ? '× Menu' : 'Menu'}</button
+		>
 	</div>
-	<div class="p251251 wrap {!visible ? 'flex' : 'none'}" style="padding-top: 0;">
+	<div class={!visible ? '' : 'none'} style="width: 150px;">
+		<div>
+			<div class="p025">
+				<a href="/carte" data-sveltekit-preload-data="hover">☀ Carte</a>
+			</div>
+			<div class="p025">
+				<a href="/info" data-sveltekit-preload-data="hover">☁ Info</a>
+			</div>
+			<form role="search" class="p025">
+				<input
+					style="padding: 0;"
+					type="text"
+					name="search"
+					aria-label="Search"
+					placeholder="☄  Recherche"
+					bind:value={searchTerm}
+				/>
+			</form>
+		</div>
 		<Select id="annee" label="Année" values={years} bind:value={selectAnnee} />
 		<Select
 			id="localisation"
@@ -226,35 +236,33 @@
 
 		<Select id="maitre" label="Maître d'ouvrage" values={maitres} bind:value={selectMaitre} />
 		<Select id="amenageur" label="Aménageur" values={amenageurs} bind:value={selectAmenageur} />
-		<div class="p025">
-			<label for="laureat">Lauréat</label>
+		<!-- <div class="p025">
 			<input
 				type="checkbox"
 				id="laureat"
 				name="laureat"
-				class="bg-green"
+				class="bg-greenn"
 				bind:checked={checkLaureat}
 			/>
-		</div>
+			<label for="laureat">Lauréat</label>
+		</div> -->
 		<!-- <selectTypeMulti id="typeMulti" label="Type" values={typeMulti} bind:group={selectTypeMulti} /> -->
 
-		<div class="p025">
-			Type :
+		<div class="p025 flex column">
+			<br />
+			<label for="laureat"
+				><input type="checkbox" id="laureat" name="laureat" bind:checked={checkLaureat} /> Lauréat</label
+			><br />
 			{#each types as value}
-				<label for={value} class="m-r"
-					><input
-						type="checkbox"
-						id={value}
-						name={value}
-						bind:group={selectTypeMulti}
-						{value}
-					/>{value}</label
+				<label for={value}
+					><input type="checkbox" id={value} name={value} bind:group={selectTypeMulti} {value} />
+					{value}</label
 				>
 			{/each}
 		</div>
 	</div>
 </aside>
-<main class="relativee bg-grey">
+<main class="bg-grey {!visible ? 'mr-150' : 'mr-50'}">
 	<div class="flex header bg-white" style="padding-bottom: 0;">
 		<div class="flex1 sm p-r">Année</div>
 		<div class="flex2 sm p-r">Localisation</div>
@@ -281,5 +289,5 @@
 		{#each filteredPosts as post}
 			<Post {post} />
 		{/each}
-	{:else}<div class="center bg-white p">Aucun résultat :(</div>{/if}
+	{:else}<div class="center bg-white p">:(</div>{/if}
 </main>
