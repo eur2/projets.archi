@@ -31,7 +31,7 @@
 			alt=""
 		/>
 	{/if}
-	<div class="absolute t0 l0 r0 p251251 z5">
+	<div class="absolute t0 l0 r0 p z5">
 		<slot />
 	</div>
 	<Logo />

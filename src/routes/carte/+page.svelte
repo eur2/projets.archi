@@ -186,7 +186,7 @@
 		const L = await import('leaflet');
 		const { MarkerClusterGroup } = await import('leaflet.markercluster');
 
-		map = L.map(mapElement).setView([43.6506786, 1.4408547], 10);
+		map = L.map(mapElement).setView([43.6506786, 1.4408547], 11);
 
 		L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
 			attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -220,7 +220,7 @@
 				const maitre = a.acf.maitre;
 				const loca = a.acf.localisation;
 				const annee = a.acf.annee;
-				const img = a.acf.image0.sizes.thumbnail;
+				const img = a.acf.image0.sizes.medium;
 				const myIcon = L.icon({
 					iconUrl: svg
 				});
@@ -268,90 +268,76 @@
 	}
 </script>
 
-<aside class="fixed t0 l0 r0 z4 sm">
-	<div class="bg-green">
-		<div class="flex jc-center p251251 w100">
-			<button class="w150" on:click={handleToggle}>{!visible ? '× Filtres' : 'Filtres'}</button>
-			<form role="search">
+<nav class="fixed b0 t0 r0 z4 sm bg-green p025 overflow-y">
+	<div class="flex jc-center p025555">
+		<button on:click={handleToggle} class={!visible ? '' : 'h-100vh flex'}
+			>{!visible ? '×' : 'Menu'}</button
+		>
+	</div>
+	<div class={!visible ? '' : 'none'} style="width: 150px;">
+		<div>
+			<div class="p025">
+				<a href="/" data-sveltekit-preload-data="hover">☀ Index</a>
+			</div>
+			<div class="p025">
+				<a href="/carte" data-sveltekit-preload-data="hover">☁ Carte</a>
+			</div>
+			<div class="p025">
+				<a href="/info" data-sveltekit-preload-data="hover">☂ Info</a>
+			</div>
+			<form role="search" class="p025">
 				<input
-					class="center w150"
+					style="padding: 0;"
 					type="text"
 					name="search"
 					aria-label="Search"
-					placeholder="Recherche"
+					placeholder="☄  Recherche"
 					bind:value={searchTerm}
 				/>
 			</form>
 		</div>
-		<div class="p251251 wrap {!visible ? 'flex' : 'none'}" style="padding-top: 0;">
-			<Select id="annee" label="Année" values={years} bind:value={selectAnnee} />
-			<Select
-				id="localisation"
-				label="Localisation"
-				values={localisations}
-				bind:value={selectLocalisation}
-			/>
-			<!-- <Select id="type" label="Type" values={types} bind:value={selectType} /> -->
-			<Select id="structure" label="Structure" values={structures} bind:value={selectStructure} />
-			<Select id="surface" label="Surface" values={surfaces} bind:value={selectSurface} />
-			<Select id="budget" label="Budget" values={budgets} bind:value={selectBudget} />
+		<Select id="annee" label="Année" values={years} bind:value={selectAnnee} />
+		<Select
+			id="localisation"
+			label="Localisation"
+			values={localisations}
+			bind:value={selectLocalisation}
+		/>
+		<!-- <Select id="type" label="Type" values={types} bind:value={selectType} /> -->
+		<Select id="structure" label="Structure" values={structures} bind:value={selectStructure} />
+		<Select id="surface" label="Surface" values={surfaces} bind:value={selectSurface} />
+		<Select id="budget" label="Budget" values={budgets} bind:value={selectBudget} />
 
-			<Select
-				id="architecte"
-				label="Architecte"
-				values={architectes}
-				bind:value={selectArchitecte}
-			/>
-			<Select
-				id="paysagiste"
-				label="Paysagiste"
-				values={paysagistes}
-				bind:value={selectPaysagiste}
-			/>
-			<SelectGroup
-				{bet_general}
-				{bet_structure}
-				{bet_environnement}
-				{bet_fluide}
-				{bet_thermique}
-				{economistes}
-				{acousticiens}
-				bind:value={selectBureauEtudes}
-			/>
+		<Select id="architecte" label="Architecte" values={architectes} bind:value={selectArchitecte} />
+		<Select id="paysagiste" label="Paysagiste" values={paysagistes} bind:value={selectPaysagiste} />
+		<SelectGroup
+			{bet_general}
+			{bet_structure}
+			{bet_environnement}
+			{bet_fluide}
+			{bet_thermique}
+			{economistes}
+			{acousticiens}
+			bind:value={selectBureauEtudes}
+		/>
 
-			<Select id="maitre" label="Maître d'ouvrage" values={maitres} bind:value={selectMaitre} />
-			<Select id="amenageur" label="Aménageur" values={amenageurs} bind:value={selectAmenageur} />
-			<div class="p025">
-				<label for="laureat">Lauréat</label>
-				<input
-					type="checkbox"
-					id="laureat"
-					name="laureat"
-					class="bg-green"
-					bind:checked={checkLaureat}
-				/>
-			</div>
-			<!-- <selectTypeMulti id="typeMulti" label="Type" values={typeMulti} bind:group={selectTypeMulti} /> -->
-
-			<div class="p025">
-				Type :
-				{#each types as value}
-					<label for={value} class="m-r"
-						><input
-							type="checkbox"
-							id={value}
-							name={value}
-							bind:group={selectTypeMulti}
-							{value}
-						/>{value}</label
-					>
-				{/each}
-			</div>
+		<Select id="maitre" label="Maître d'ouvrage" values={maitres} bind:value={selectMaitre} />
+		<Select id="amenageur" label="Aménageur" values={amenageurs} bind:value={selectAmenageur} />
+		<div class="p025 flex column">
+			<br />
+			<label for="laureat"
+				><input type="checkbox" id="laureat" name="laureat" bind:checked={checkLaureat} /> Lauréat</label
+			><br />
+			{#each types as value}
+				<label for={value}
+					><input type="checkbox" id={value} name={value} bind:group={selectTypeMulti} {value} />
+					{value}</label
+				>
+			{/each}
 		</div>
 	</div>
-</aside>
+</nav>
 <main>
-	<!-- <input type="button" value="Remove point" on:click={removePoint} /> -->
 	<div id="map" bind:this={mapElement} />
 </main>
 <aside>
