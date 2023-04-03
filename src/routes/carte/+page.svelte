@@ -188,8 +188,12 @@
 
 		map = L.map(mapElement).setView([43.6506786, 1.4408547], 11);
 
-		L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-			attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+		// L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+		// 	attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+		// }).addTo(map);
+
+		L.tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+			attribution: ''
 		}).addTo(map);
 
 		mounted = true;
@@ -270,8 +274,8 @@
 
 <nav class="fixed b0 t0 r0 z4 sm bg-green p025 overflow-y">
 	<div class="flex jc-center p025555">
-		<button on:click={handleToggle} class={!visible ? '' : 'h-100vh flex'}
-			>{!visible ? '×' : 'Menu'}</button
+		<button on:click={handleToggle} class={!visible ? 'close' : 'h-100vh flex'}
+			>{!visible ? '×' : '☰'}</button
 		>
 	</div>
 	<div class={!visible ? '' : 'none'} style="width: 150px;">

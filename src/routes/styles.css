@@ -101,7 +101,7 @@ img {
 	/* transition: opacity 0.2s; */
 }
 .splash{
-	max-width: 50%;
+	max-width: 40%;
 }
 h1,
 h2,
@@ -243,10 +243,10 @@ article header:hover a, .eeee, .bg-grey {
 .mr-1{
 	margin-right: 1em;
 }
-.mr-50{
-	margin-right: 40px;
+.mr-close{
+	margin-right: 28px;
 }
-.mr-150{
+.mr-open{
 	margin-right: 150px;
 }
 .flex1 {
@@ -349,6 +349,9 @@ article header:hover a, .eeee, .bg-grey {
 	  z-index: 100;
 	  overflow-y: auto;
   } 
+  .close{
+	font-size: 2em;
+  }
 @media only screen and (max-width: 960px) {
 	html{
 		font-size: 1.1rem;
@@ -379,9 +382,12 @@ article header{
 	padding-right: 0;
 } */
 .splash{
-	max-width: 90%;
+	max-width: 60%;
 }
 h1{
 	font-size: 1em;
+}
+.mr-open{
+	margin-right: 0;
 }
 } 

@@ -211,8 +211,8 @@
 
 <nav class="fixed b0 t0 r0 z4 sm bg-green p025 overflow-y">
 	<div class="flex jc-center p025555">
-		<button on:click={handleToggle} class={!visible ? '' : 'h-100vh flex'}
-			>{!visible ? '×' : 'Menu'}</button
+		<button on:click={handleToggle} class={!visible ? 'close' : 'h-100vh flex'}
+			>{!visible ? '×' : '☰'}</button
 		>
 	</div>
 	<div class={!visible ? '' : 'none'} style="width: 150px;">
@@ -278,7 +278,7 @@
 		</div>
 	</div>
 </nav>
-<main class="bg-grey {!visible ? 'mr-150' : 'mr-50'}">
+<main class="bg-grey {!visible ? 'mr-open' : 'mr-close'}">
 	<div class="flex header bg-white" style="padding-bottom: 0;">
 		<div class="flex1 sm p-r">Année</div>
 		<div class="flex2 sm p-r">Localisation</div>
@@ -307,6 +307,6 @@
 		{/each}
 	{:else}<div class="center bg-white p">:(</div>{/if}
 </main>
-<footer class="center eeeee bg-fbfbfb p sm {!visible ? 'mr-150' : 'mr-50'}">
+<footer class="center eeeee bg-fbfbfb p sm {!visible ? 'mr-open' : 'mr-close'}">
 	{@html footer.content.rendered}
 </footer>

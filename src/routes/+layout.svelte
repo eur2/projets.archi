@@ -1,6 +1,6 @@
 <script>
 	import './styles.css';
-	export let data;
+	// export let data;
 </script>
 
 <svelte:head>
