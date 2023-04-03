@@ -2,7 +2,7 @@
 	import Logo from '$lib/Logo.svelte';
 	export let data;
 	const { info, legal, header, footer } = data;
-	let w, visible;
+	let visible;
 	// if (w > 720) {
 	// 	visible = false;
 	// }
@@ -14,11 +14,11 @@
 <Logo />
 <nav class="fixed b0 t0 r0 z5 sm bg-green p025 overflow-y">
 	<div class="flex jc-center p025555">
-		<button on:click={handleToggle} class={!visible ? 'close' : 'h-100vh flex'}
-			>{!visible ? '×' : '☰'}</button
+		<button on:click={handleToggle} class={visible ? 'close' : 'h-100vh flex'}
+			>{visible ? '×' : '☰'}</button
 		>
 	</div>
-	<div class={!visible ? '' : 'none'} style="width: 150px;">
+	<div class={visible ? '' : 'none'} style="width: 150px;">
 		<div>
 			<div class="p025">
 				<a href="/" data-sveltekit-preload-data="hover">☀ Index</a>
@@ -32,7 +32,7 @@
 		</div>
 	</div>
 </nav>
-<main class="p page bg-grey {!visible ? 'mr-open' : 'mr-close'}">
+<main class="p page bg-grey {visible ? 'mr-open' : 'mr-close'}">
 	<header>
 		{@html header.content.rendered}
 	</header>
@@ -42,6 +42,6 @@
 		{@html legal.content.rendered}
 	</details>
 </main>
-<footer class="center p sm {!visible ? 'mr-open' : 'mr-close'}">
+<footer class="center p sm {visible ? 'mr-open' : 'mr-close'}">
 	{@html footer.content.rendered}
 </footer>
