@@ -46,6 +46,7 @@ export const load = async () => {
 
 	return {
 		posts: fetchPosts(),
+		randomPost: posts[Math.floor(Math.random() * 20)],
 		footer: fetchFooter(),
 		header: fetchHeader(),
 		years: [
