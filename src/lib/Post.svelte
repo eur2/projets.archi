@@ -29,7 +29,7 @@
 		<div class="flex2 p-r">{post.acf.localisation}</div>
 		<div class="flex5 p-r">
 			<div>{post.acf.projet.name}</div>
-			<div class="inlineflex ">
+			<div class="inlineflex">
 				<!-- {#if laureat === true}<div class="sm tag">laureat</div>{:else}{/if} -->
 				<!-- <div class="sm tag" class:selected={isTypeSelect === true}>
 					{post.acf.type}
@@ -208,7 +208,7 @@
 			<div class="p flex1">
 				<div>
 					<div class="sm">Description</div>
-					<div class="mb">{post.acf.description}</div>
+					<div class="mb">{@html post.acf.description}</div>
 				</div>
 				<MapMini {post} />
 			</div>

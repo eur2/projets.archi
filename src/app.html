@@ -42,14 +42,22 @@
 			font-display: fallback;
 		}
 	</style>
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-4H2FXQMLC9"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@minimal-analytics/ga4/dist/index.js" async></script>
+
+	<script>
+		window.minimalAnalytics = {
+			trackingId: 'G-4H2FXQMLC9', // <-- replace with your GA4 property ID
+			autoTrack: true,
+		};
+	</script>
+	<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-4H2FXQMLC9"></script>
 	<script>
 		window.dataLayer = window.dataLayer || [];
 		function gtag() { dataLayer.push(arguments); }
 		gtag('js', new Date());
 
 		gtag('config', 'G-4H2FXQMLC9');
-	</script>
+	</script> -->
 	%sveltekit.head%
 </head>
 
