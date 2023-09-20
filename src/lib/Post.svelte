@@ -16,14 +16,15 @@
 	}
 </script>
 
-<article id={post.id} class="border-top content-visibility">
+<article id={post.id} class="border-top">
 	<header
+		role="button"
+		tabindex="0"
 		on:click={handleToggle}
 		on:keydown={handleToggle}
 		on:mouseenter={enter}
 		on:mouseleave={leave}
-		class={visible ? 'sticky t0 eeee z4 pointer' : 'bg-white pointer'}
-		style="padding-bottom:2em;"
+		class={visible ? 'eeee z4 pointer' : 'bg-white pointer'}
 	>
 		<div class="flex1 p-r">{post.acf.annee}</div>
 		<div class="flex2 p-r">{post.acf.localisation}</div>
@@ -43,8 +44,16 @@
 				<div class="sm tag" class:selected={isBudgetSelect === true}>
 					{post.acf.budget}
 				</div> -->
+				{#if post.acf.type_construction}
+					<div class="sm tag" class:bg-fbfbfb={visible === true}>
+						{post.acf.type_construction[0]}<br />{#if post.acf.type_construction[1]}
+							{post.acf.type_construction[1]}<br />{/if}{#if post.acf.type_construction[2]}
+							{post.acf.type_construction[2]}<br />{/if}
+					</div>{/if}
 				<div class="sm tag" class:bg-fbfbfb={visible === true}>
-					{post.acf.type}
+					{post.acf.types[0]}<br />{#if post.acf.types[1]}
+						{post.acf.types[1]}<br />{/if}{#if post.acf.types[2]}
+						{post.acf.types[2]}<br />{/if}
 				</div>
 				<div class="sm tag" class:bg-fbfbfb={visible === true}>
 					{post.acf.structure}
@@ -74,7 +83,7 @@
 				class:rotate={visible === true}
 				stroke="currentColor"
 				fill="none"
-				stroke-width="2"
+				stroke-width="1"
 				viewBox="0 0 24 24"
 				stroke-linecap="round"
 				stroke-linejoin="round"
@@ -85,7 +94,7 @@
 		</div>
 	</header>
 	{#if hovering}
-		<div class="absolute z5 thumb" class:none={visible === true}>
+		<div class="absolute z3 thumb" class:none={visible === true}>
 			{#if post.acf.image0}
 				<img src={post.acf.image0.sizes.medium} width="300" alt="alt" />
 			{/if}
@@ -93,7 +102,7 @@
 	{/if}
 	{#if visible}
 		<div class="flex bg-fbfbfb">
-			<div class="p flex1">
+			<section class="p flex1 facts-container">
 				<div>
 					<div class="sm">Architecte</div>
 					<div class="mb">{post.acf.architecte}<br />{post.acf.architecte_associé}</div>
@@ -174,10 +183,34 @@
 						<div class="mb">{post.acf.amenageur}</div>
 					</div>
 				{/if}
+				<!-- <div>
+					<div class="sm">Type</div>
+					<div class="mb">{post.acf.types.join(', ')}</div>
+				</div> -->
 				<div>
 					<div class="sm">Type</div>
-					<div class="mb">{post.acf.type}</div>
+					<div class="mb">
+						{post.acf.types[0]}<br />{#if post.acf.types[1]}
+							{post.acf.types[1]}<br />{/if}{#if post.acf.types[2]}
+							{post.acf.types[2]}<br />{/if}
+					</div>
 				</div>
+				<!-- {#if post.acf.type_construction}
+					<div>
+						<div class="sm">Type de construction</div>
+						<div class="mb">{post.acf.type_construction}</div>
+					</div>
+				{/if} -->
+				{#if post.acf.type_construction}
+					<div>
+						<div class="sm">Type de construction</div>
+						<div class="mb">
+							{post.acf.type_construction[0]}<br />{#if post.acf.type_construction[1]}
+								{post.acf.type_construction[1]}<br />{/if}{#if post.acf.type_construction[2]}
+								{post.acf.type_construction[2]}<br />{/if}
+						</div>
+					</div>
+				{/if}
 				<div>
 					<div class="sm">Localisation</div>
 					<div class="mb">{post.acf.localisation}</div>
@@ -204,15 +237,15 @@
 						<div class="mb">{post.acf.plus}</div>
 					</div>
 				{/if}
-			</div>
-			<div class="p flex1">
+			</section>
+			<section class="p flex2">
 				<div>
 					<div class="sm">Description</div>
 					<div class="mb">{@html post.acf.description}</div>
 				</div>
 				<MapMini {post} />
-			</div>
-			<div class="flex1 p">
+			</section>
+			<section class="flex1 p">
 				{#if post.acf.image1}
 					<div class="sm">Planche 1</div>
 					<a rel="noreferrer" target="_blank" href={post.acf.image1.sizes['2048x2048']}
@@ -252,7 +285,7 @@
 						/></a
 					>
 				{/if}
-			</div>
+			</section>
 		</div>
 	{/if}
 </article>

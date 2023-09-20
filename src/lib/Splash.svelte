@@ -16,6 +16,8 @@
 </script>
 
 <header
+	role="button"
+	tabindex="0"
 	class="fixed t0 l0 r0 b0 flex jc-center ai-center bg-green pointer z5"
 	on:click={close}
 	on:keydown={close}
@@ -31,8 +33,8 @@
 			alt=""
 		/>
 	{/if}
-	<div class="absolute t0 l0 r0 p251251 z5">
+	<div class="absolute t0 l0 r0 p z5">
 		<slot />
 	</div>
-	<Logo />
+	<!-- <Logo /> -->
 </header>

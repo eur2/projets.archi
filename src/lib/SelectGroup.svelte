@@ -24,9 +24,9 @@
 	</select>
 </div> -->
 
-<div class="p025">
+<div class="p025 flex column">
 	<label for="bureaux">Bureaux d'études</label>
-	<select name="bureaux" id="bureaux" class="bg-green" bind:value>
+	<select name="bureaux" id="bureaux" class="bg-green" bind:value on:change={() => scrollTo(0, 0)}>
 		<option value="all" />
 		<optgroup label="BET Général">
 			{#each bet_general as value}

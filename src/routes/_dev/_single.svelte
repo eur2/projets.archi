@@ -36,6 +36,10 @@
 	function handleToggle() {
 		visible = !visible;
 	}
+	let mapVisible;
+	function handleToggleMap() {
+		mapVisible = !mapVisible;
+	}
 	let searchTerm = '';
 	let selectTypeMulti = [];
 	let checkLaureat = false;
@@ -175,6 +179,107 @@
 					  (checkLaureat === false || post.acf.laureat === checkLaureat)
 			);
 	}
+	// import { browser } from '$app/environment';
+	// import leaflet from 'leaflet';
+	// import 'leaflet.markercluster';
+	import { onMount, onDestroy } from 'svelte';
+	import svg from '$lib/marker.svg';
+	let mapElement;
+	let map;
+	let mounted = false;
+	let currentMarkersGroup = null;
+
+	onMount(async () => {
+		const L = await import('leaflet');
+		const { MarkerClusterGroup } = await import('leaflet.markercluster');
+
+		map = L.map(mapElement).setView([43.6506786, 1.4408547], 11);
+
+		// L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+		// 	attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+		// }).addTo(map);
+
+		L.tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+			attribution: ''
+		}).addTo(map);
+
+		mounted = true;
+	});
+
+	onDestroy(async () => {
+		if (map) {
+			// console.log('Unloading Leaflet map.');
+			map.remove();
+		}
+	});
+	$: {
+		// This makes sure we have run onMount already and initialized the map
+		if (mounted) {
+			// If we already have a group, we need to clean it up before creating a new one
+			if (currentMarkersGroup) {
+				map.removeLayer(currentMarkersGroup);
+			}
+
+			// Create a new group
+			currentMarkersGroup = L.markerClusterGroup();
+
+			for (let i = 0; i < filteredPosts.length; i++) {
+				const a = filteredPosts[i];
+				const id = a.id;
+				const slug = a.slug;
+				const title = a.acf.projet.name;
+				const arch = a.acf.architecte;
+				const maitre = a.acf.maitre;
+				const loca = a.acf.localisation;
+				const annee = a.acf.annee;
+				// const img = a.acf.image0.sizes.medium;
+				const img = a.acf.image0.sizes.thumbnail;
+				const myIcon = L.icon({
+					iconUrl: svg
+				});
+				const marker = L.marker(new L.LatLng(a.acf.lat, a.acf.lon), {
+					title: title,
+					arch: arch,
+					maitre: maitre,
+					loca: loca,
+					annee: annee,
+					img: img,
+					icon: myIcon,
+					id: id,
+					slug: slug
+				});
+				marker.bindPopup(
+					`<div class="sm">Projet</div>
+					<div class="mb">
+						${title}
+					</div>
+					<div class="sm">Architecte</div>
+					<div class="mb">
+						${arch}
+					</div>
+					<div class="sm">Maître d'ouvrage</div>
+					<div class="mb">
+						${maitre}
+					</div>
+					<div class="sm">Localisation</div>
+					<div class="mb">
+						${loca}
+					</div>
+					<div class="sm">Année</div>
+					<div class="mb">
+						${annee}
+					</div>
+					<div><a target="_blank" href=${id} rel="noopener noreferrer nofollow"
+						><img width="300" src=${img} alt=${title} /></a
+					></div>`,
+					{ maxWidth: 270 }
+				);
+				currentMarkersGroup.addLayer(marker);
+			}
+
+			map.addLayer(currentMarkersGroup);
+		}
+	}
 </script>
 
 {#if $splashOpen}
@@ -182,8 +287,8 @@
 		{@html header.content.rendered}
 	</Splash>
 {/if}
-<!-- <div class="z5 fixed t0 l0 p025 p05 logo" style="max-width: 100px;"></div> -->
-<div class="z5 absolute t0 l0 p05 logo">
+
+<div class="fixed t0 l0 p025 logo" style="max-width: 100px;">
 	<a href="https://maop.fr/" target="_blank" rel="noreferrer">
 		<svg
 			data-name="Logo MAOP"
@@ -209,25 +314,21 @@
 	</a>
 </div>
 <nav class="fixed b0 l0 r0 z4 flex jc-center {!visible ? 'mr-open' : 'mr-close'}">
-	<a href="/carte" class="p05 m025 bg-black border-radius" data-sveltekit-preload-data="hover"
+	<!-- <a href="/carte" class="p05 m025 bg-black border-radius" data-sveltekit-preload-data="hover"
 		>Carte</a
+	> -->
+	<button on:click={handleToggleMap} class="p05 m025 bg-black border-radius"
+		>{!mapVisible ? 'Carte' : 'Index'}</button
 	>
 	<a href="/info" class="p05 m025 bg-black border-radius" data-sveltekit-preload-data="hover"
 		>Info</a
 	>
 </nav>
 <aside class="fixed b0 t0 r0 z4 sm bg-green p025 overflow-y {!visible ? 'open' : 'close'}">
-	<!-- <button on:click={handleToggle} class="absolute t0 b0 r0 w100 z-1" style="padding: 0;"></button> -->
-	<div
-		aria-label="Filter menu"
-		role="button"
-		tabindex="0"
-		on:click={handleToggle}
-		on:keydown={handleToggle}
-		class="pointer absolute t0 b0 r0 w100 z-1"
-	/>
+	<button on:click={handleToggle} class="absolute t0 b0 r0 w100 z-1" style="padding: 0;"></button>
+
 	<div class={!visible ? 'open-content' : 'close-content'}>
-		<div class="fixed t0 r0 p025">
+		<div class="fixed t0 r0">
 			<button on:click={handleToggle}>
 				<svg
 					width="24"
@@ -322,37 +423,43 @@
 		</div>
 	</div>
 </aside>
-<main class="bg-grey {!visible ? 'mr-open' : 'mr-close'}">
-	<div class="flex header bg-white" style="padding-bottom: 0;">
-		<div class="flex1 sm p-r">Année</div>
-		<div class="flex2 sm p-r">Localisation</div>
-		<div class="flex5 sm p-r">Projet</div>
-		<div class="flex2 sm p-r">Maître d'ouvrage</div>
-		<div class="flex2 sm p-r">Architecte</div>
-		<div style="visibility: hidden;">
-			<svg
-				class="w20"
-				class:rotate={visible === true}
-				stroke="currentColor"
-				fill="none"
-				stroke-width="1"
-				viewBox="0 0 24 24"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-				height="1em"
-				width="1em"
-				xmlns="http://www.w3.org/2000/svg"><polyline points="6 9 12 15 18 9" /></svg
-			>
+{#if mapVisible}
+	<main>
+		<div id="map" bind:this={mapElement} />
+	</main>
+{:else}
+	<main class="bg-grey {!visible ? 'mr-open' : 'mr-close'} {!mapVisible ? 'block' : 'none'}">
+		<div class="flex header bg-white" style="padding-bottom: 0;">
+			<div class="flex1 sm p-r">Année</div>
+			<div class="flex2 sm p-r">Localisation</div>
+			<div class="flex5 sm p-r">Projet</div>
+			<div class="flex2 sm p-r">Maître d'ouvrage</div>
+			<div class="flex2 sm p-r">Architecte</div>
+			<div style="visibility: hidden;">
+				<svg
+					class="w20"
+					class:rotate={visible === true}
+					stroke="currentColor"
+					fill="none"
+					stroke-width="1"
+					viewBox="0 0 24 24"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					height="1em"
+					width="1em"
+					xmlns="http://www.w3.org/2000/svg"><polyline points="6 9 12 15 18 9" /></svg
+				>
+			</div>
 		</div>
-	</div>
-	<div>
-		{#if filteredPosts.length}
-			{#each filteredPosts as post}
-				<Post {post} />
-			{/each}
-		{:else}<div class="center bg-white p">Aucun résultat :(</div>{/if}
-	</div>
-</main>
+		<div>
+			{#if filteredPosts.length}
+				{#each filteredPosts as post}
+					<Post {post} />
+				{/each}
+			{:else}<div class="center bg-white p">Aucun résultat :(</div>{/if}
+		</div>
+	</main>
+{/if}
 <footer class="center eeeee bg-fbfbfb mb p sm {!visible ? 'mr-open' : 'mr-close'}">
 	{@html footer.content.rendered}<br />
 	<!-- <div class="non">
@@ -361,3 +468,20 @@
 		{/each}
 	</div> -->
 </footer>
+
+<style>
+	/* @import 'https://unpkg.com/leaflet@1.9.3/dist/leaflet.css';
+	@import 'https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css';
+	@import 'https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css'; */
+	@import 'leaflet/dist/leaflet.css';
+	@import 'leaflet.markercluster/dist/MarkerCluster.css';
+	@import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
+	#map {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		height: 100%;
+	}
+</style>

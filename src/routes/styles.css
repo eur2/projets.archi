@@ -8,12 +8,21 @@ html {
 	background-color: white;
 	color: black;
 	font-family: 'Self Modern', serif;
-	font-size: 1.25rem;
+	font-size: 1.20rem;
 	line-height: 1.2;
 	-moz-osx-font-smoothing: grayscale;
 	-webkit-font-smoothing: antialiased;
 	height: 100%;
 	/* scroll-behavior: smooth; */
+}
+body{
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+footer{
+	margin-top: auto;
+
 }
 a,
 a:active {
@@ -40,16 +49,23 @@ p a, h1 a{
 .bg-green {
 	background-color: rgb(36, 252, 131);
 }
+.bg-black{
+	background-color: black;
+	color: white;
+	font-style: italic;
+	text-transform: uppercase;
+}
 .bg-fbfbfb{
 	background-color: #fbfbfb;
 }
 
 
-a:hover, button:hover,
+/* a:hover, button:hover,
 footer p a:hover{
-	text-decoration: underline;
-}
-.current{
+	 text-decoration: underline;
+} */
+.current, a:hover, button:hover,
+footer p a:hover{
 	font-style: italic;
 }
 p,h1 {
@@ -67,9 +83,20 @@ input {
 	background-color: transparent;
 	appearance: none;
 }
-select, input{
-	border-radius: .5em;
-	border-color: black;
+select, form{
+	border-radius:1em;
+	padding: .25em;
+	/* border-color: black; */
+} 
+select{
+	border: 1px dotted black;
+}
+/* form{
+	border: 1px solid black;
+
+} */
+input{
+	max-width: 100%;
 }
 input[type="checkbox"] {
 	/* appearance: none;
@@ -92,7 +119,7 @@ img {
 	/* transition: opacity 0.2s; */
 }
 .splash{
-	max-width: 50%;
+	max-width: 45%;
 }
 h1,
 h2,
@@ -107,9 +134,7 @@ h1{
 .info h1{
 	font-size: 1em;
 }
-/* .logo {
-	width: 80px;
-} */
+
 svg {
 	width: 100%;
 	height: auto;
@@ -147,7 +172,7 @@ article header:hover a, .eeee, .bg-grey {
 .block {
 	display: block;
 }
-.none {
+.none, .leaflet-control-attribution {
 	display: none;
 }
 .relative {
@@ -183,6 +208,9 @@ article header:hover a, .eeee, .bg-grey {
 .w20{
 	width: 20px;
 }
+/* .w-22px{
+	width: 22px;
+} */
 .w150{
 	width: 150px;
 }
@@ -231,6 +259,10 @@ article header:hover a, .eeee, .bg-grey {
 .p-r{
 	padding-right: 2rem;
 }
+.mr-1{
+	margin-right: 1em;
+}
+
 .flex1 {
 	flex: 1;
 }
@@ -264,7 +296,12 @@ article header:hover a, .eeee, .bg-grey {
 .border-radius{
 	border-radius: 1em;
 }
-
+.h-100vh{
+	height: 100vh;
+}
+.overflow-y{
+	overflow-y: auto;
+}
 /* .hyphens {
 	overflow-wrap: break-word;
 	word-wrap: break-word;
@@ -285,11 +322,12 @@ article header:hover a, .eeee, .bg-grey {
 	display: flex;
 	margin: auto;
 	width: 600px;
+	mix-blend-mode: multiply;
 }
-.mix-blend {
+/* .mix-blend {
 	mix-blend-mode: difference;
 	color: white;
-}
+} */
 .rotate{
 	rotate: 180deg;
 }
@@ -306,13 +344,16 @@ article header:hover a, .eeee, .bg-grey {
     margin: .5em !important;
     line-height: 1.2 !important;
 }
-.marker-cluster-small, .marker-cluster-small div {
-	background-color: rgb(36, 252, 131) !important;
+.marker-cluster, .marker-cluster div {
+	/* background-color: rgb(36, 252, 131) !important; */
+	background-color: black !important;
+	color: white !important;
+
 }
 .marker-cluster div {
 	font: 16px 'Self Modern', serif !important;
 }
-.target{
+/* .target{
 	display: none;
   }
     .target:target{
@@ -324,13 +365,40 @@ article header:hover a, .eeee, .bg-grey {
 	  bottom: 0;
 	  z-index: 100;
 	  overflow-y: auto;
-  } 
+  }  */
+
+  .title-multi{
+  border-bottom: 1px dotted black;
+  padding-bottom: 0.25em;
+  margin-bottom: 0.25em;
+}
+.mr-close{
+	margin-right: 24px;
+}
+.mr-open{
+	margin-right: 170px;
+}
+.open{
+	width: 170px;
+}
+.close{
+	width: 24px;
+}
+.open-content{
+display: block;
+}
+.close-content{
+display: none;
+}
 @media only screen and (max-width: 960px) {
 	html{
-		font-size: 18px;
+		font-size: 1.1rem;
 	}
 }
- @media only screen and (max-width: 732px) {
+ @media only screen and (max-width: 600px) {
+	aside.sm{
+		font-size: 1em;
+	}
 article .flex{
 	display: block;
 }
@@ -355,9 +423,37 @@ article header{
 	padding-right: 0;
 } */
 .splash{
-	max-width: 90%;
+	max-width: 80%;
 }
 h1{
 	font-size: 1em;
 }
+
+.facts-container{
+	display: flex;
+	flex-wrap: wrap;
+	}
+	.facts-container div{
+		flex: 50%;
+		padding-right: .5em;
+	}
+	.logo {
+	z-index: 4;
+}
+.open{
+	width: 24px;
+}
+.close{
+	width: 75%;
+}
+.mr-open{
+	margin-right: 24px;
+}
+.open-content{
+	display: none;
+
+	}
+	.close-content{
+	display: block;
+	}
 } 

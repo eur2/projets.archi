@@ -7,12 +7,11 @@
 	Something small enough to escape casual notice.
 </details> -->
 
-<div class="p025 flex column">
+<div class="p025">
 	<label for={id}>{label}</label>
-	<select {id} class="bg-green" bind:value on:change={() => scrollTo(0, 0)}>
-		<option value="all" />
+	<select {name} {id} class="bg-green" multiple bind:value>
 		{#each values as value}
-			<option value={value.toLowerCase()}>{value}</option>
+			<option {value}>{value}</option>
 		{/each}
 	</select>
 </div>
