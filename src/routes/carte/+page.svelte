@@ -51,7 +51,10 @@
 				(post) =>
 					post.acf.types.some((value) => value.toLowerCase().indexOf(searchTerm) !== -1) ||
 					post.acf.projet.name.toLowerCase().indexOf(searchTerm) !== -1 ||
-					post.acf.localisation.toLowerCase().indexOf(searchTerm) !== -1 ||
+					(post.acf.localisation &&
+						post.acf.localisation.toLowerCase().indexOf(searchTerm) !== -1) ||
+					(post.acf.localisation1 &&
+						post.acf.localisation1.toLowerCase().indexOf(searchTerm) !== -1) ||
 					post.acf.architecte.toLowerCase().indexOf(searchTerm) !== -1 ||
 					post.acf.architecte_associé.toLowerCase().indexOf(searchTerm) !== -1 ||
 					post.acf.amenageur.toLowerCase().indexOf(searchTerm) !== -1 ||
@@ -83,7 +86,10 @@
 					? true
 					: (selectAnnee === 'all' || post.acf.annee == selectAnnee) &&
 					  (selectLocalisation === 'all' ||
-							post.acf.localisation.toLowerCase() === selectLocalisation) &&
+							(post.acf.localisation &&
+								post.acf.localisation.toLowerCase() === selectLocalisation) ||
+							(post.acf.localisation1 &&
+								post.acf.localisation1.toLowerCase() === selectLocalisation)) &&
 					  (selectStructure === 'all' || post.acf.structure.toLowerCase() === selectStructure) &&
 					  (selectSurface === 'all' || post.acf.surface.toLowerCase() === selectSurface) &&
 					  (selectBudget === 'all' || post.acf.budget.toLowerCase() === selectBudget) &&
@@ -115,7 +121,10 @@
 			.filter(
 				(post) =>
 					post.acf.projet.name.toLowerCase().indexOf(searchTerm) !== -1 ||
-					post.acf.localisation.toLowerCase().indexOf(searchTerm) !== -1 ||
+					(post.acf.localisation &&
+						post.acf.localisation.toLowerCase().indexOf(searchTerm) !== -1) ||
+					(post.acf.localisation1 &&
+						post.acf.localisation1.toLowerCase().indexOf(searchTerm) !== -1) ||
 					post.acf.architecte.toLowerCase().indexOf(searchTerm) !== -1 ||
 					post.acf.architecte_associé.toLowerCase().indexOf(searchTerm) !== -1 ||
 					post.acf.amenageur.toLowerCase().indexOf(searchTerm) !== -1 ||
@@ -146,7 +155,10 @@
 					? true
 					: (selectAnnee === 'all' || post.acf.annee == selectAnnee) &&
 					  (selectLocalisation === 'all' ||
-							post.acf.localisation.toLowerCase() === selectLocalisation) &&
+							(post.acf.localisation &&
+								post.acf.localisation.toLowerCase() === selectLocalisation) ||
+							(post.acf.localisation1 &&
+								post.acf.localisation1.toLowerCase() === selectLocalisation)) &&
 					  (selectStructure === 'all' || post.acf.structure.toLowerCase() === selectStructure) &&
 					  (selectSurface === 'all' || post.acf.surface.toLowerCase() === selectSurface) &&
 					  (selectBudget === 'all' || post.acf.budget.toLowerCase() === selectBudget) &&
@@ -220,7 +232,7 @@
 				const title = a.acf.projet.name;
 				const arch = a.acf.architecte;
 				const maitre = a.acf.maitre;
-				const loca = a.acf.localisation;
+				const loca = a.acf.localisation ? a.acf.localisation : a.acf.localisation1;
 				const annee = a.acf.annee;
 				// const img = a.acf.image0.sizes.medium;
 				const img = a.acf.image0.sizes.thumbnail;

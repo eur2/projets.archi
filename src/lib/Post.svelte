@@ -27,7 +27,10 @@
 		class={visible ? 'eeee z4 pointer' : 'bg-white pointer'}
 	>
 		<div class="flex1 p-r">{post.acf.annee}</div>
-		<div class="flex2 p-r">{post.acf.localisation}</div>
+		<div class="flex2 p-r">
+			{#if post.acf.localisation}
+				{post.acf.localisation}{:else}{post.acf.localisation1}{/if}
+		</div>
 		<div class="flex5 p-r">
 			<div>{post.acf.projet.name}</div>
 			<div class="inlineflex">
@@ -213,7 +216,10 @@
 				{/if}
 				<div>
 					<div class="sm">Localisation</div>
-					<div class="mb">{post.acf.localisation}</div>
+					<div class="mb">
+						{#if post.acf.localisation}
+							{post.acf.localisation}{:else}{post.acf.localisation1}{/if}
+					</div>
 				</div>
 				<div>
 					<div class="sm">Année</div>

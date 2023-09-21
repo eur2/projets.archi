@@ -32,6 +32,17 @@ export const load = async () => {
 	};
 	const posts = await fetchPosts();
 
+	const localisations = posts
+		.reduce(function (prev, post) {
+			const loc = post.acf.localisation;
+			const loc1 = post.acf.localisation1;
+			return prev.concat(loc, loc1);
+		}, [])
+		.filter((n) => n);
+
+	const uniqueLocalisations = [...new Set(localisations)].sort();
+	// console.log(uniqueLocalisations);
+
 	const architectes = posts
 		.reduce(function (prev, post) {
 			const architecte = post.acf.architecte;
@@ -65,7 +76,7 @@ export const load = async () => {
 		footer: fetchFooter(),
 		header: fetchHeader(),
 		years: extractAndSortField(posts, 'annee'),
-		localisations: extractAndSortField(posts, 'localisation'),
+		localisations: uniqueLocalisations,
 		structures: extractAndSortField(posts, 'structure'),
 		surfaces: extractAndSortField(posts, 'surface'),
 		budgets: extractAndSortField(posts, 'budget'),
