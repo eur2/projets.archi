@@ -134,11 +134,11 @@ h1{
 .info h1{
 	font-size: 1em;
 }
-
+/*
 svg {
 	width: 100%;
 	height: auto;
-}
+}*/
 h2,
 .sm {
 	font-size: 12px;
