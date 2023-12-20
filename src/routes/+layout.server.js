@@ -72,9 +72,9 @@ export const load = async () => {
 		].sort();
 	}
 	return {
-		posts: fetchPosts(),
-		footer: fetchFooter(),
-		header: fetchHeader(),
+		posts: await fetchPosts(),
+		footer: await fetchFooter(),
+		header: await fetchHeader(),
 		years: extractAndSortField(posts, 'annee'),
 		localisations: uniqueLocalisations,
 		structures: extractAndSortField(posts, 'structure'),

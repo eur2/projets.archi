@@ -13,7 +13,7 @@ export const load = async () => {
 	};
 
 	return {
-		info: fetchInfo(),
-		legal: fetchLegal()
+		info: await fetchInfo(),
+		legal: await fetchLegal()
 	};
 };
