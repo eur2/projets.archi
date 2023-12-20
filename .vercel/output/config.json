@@ -1,0 +1,51 @@
+{
+	"version": 3,
+	"routes": [
+		{
+			"src": "/carte",
+			"dest": "/carte/"
+		},
+		{
+			"src": "/carte/",
+			"status": 308,
+			"headers": {
+				"Location": "/carte"
+			}
+		},
+		{
+			"src": "/info",
+			"dest": "/info/"
+		},
+		{
+			"src": "/info/",
+			"status": 308,
+			"headers": {
+				"Location": "/info"
+			}
+		},
+		{
+			"src": "/_app/immutable/.+",
+			"headers": {
+				"cache-control": "public, immutable, max-age=31536000"
+			}
+		},
+		{
+			"handle": "filesystem"
+		},
+		{
+			"src": "/.*",
+			"dest": "/fn"
+		}
+	],
+	"overrides": {
+		"index.html": {
+			"path": ""
+		},
+		"carte.html": {
+			"path": "carte"
+		},
+		"info.html": {
+			"path": "info"
+		}
+	}
+}
