@@ -8,7 +8,7 @@ export const load = async ({ params }) => {
 	};
 
 	return {
-		post: fetchPost(params.id)
+		post: await fetchPost(params.id)
 	};
 };
 
