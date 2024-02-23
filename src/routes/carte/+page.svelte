@@ -269,7 +269,7 @@
 					<div class="mb">
 						${annee}
 					</div>
-					<div><a target="_blank" href=${id} rel="noopener noreferrer nofollow"
+					<div><a target="_blank" href=${`https://pp.maop.fr/${id}`} rel="noopener noreferrer nofollow"
 						><img width="300" src=${img} alt=${title} /></a
 					></div>`,
 					{ maxWidth: 270 }
