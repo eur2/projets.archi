@@ -10,7 +10,7 @@ export const load = async () => {
 	// 	return data;
 	// };
 	const fetchPosts = async () => {
-		const res = await fetch(`https://pp.maop.fr/wp-json/wp/v2/posts?per_page=200&_fields=acf`);
+		const res = await fetch(`https://pp.maop.fr/wp-json/wp/v2/posts?per_page=200&_fields=id,acf`);
 		const rawdata = await res.json();
 		var data = arraySort(
 			rawdata,

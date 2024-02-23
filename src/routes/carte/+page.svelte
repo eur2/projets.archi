@@ -85,22 +85,22 @@
 				selectPaysagiste === 'all'
 					? true
 					: (selectAnnee === 'all' || post.acf.annee == selectAnnee) &&
-					  (selectLocalisation === 'all' ||
+						(selectLocalisation === 'all' ||
 							(post.acf.localisation &&
 								post.acf.localisation.toLowerCase() === selectLocalisation) ||
 							(post.acf.localisation1 &&
 								post.acf.localisation1.toLowerCase() === selectLocalisation)) &&
-					  (selectStructure === 'all' || post.acf.structure.toLowerCase() === selectStructure) &&
-					  (selectSurface === 'all' || post.acf.surface.toLowerCase() === selectSurface) &&
-					  (selectBudget === 'all' || post.acf.budget.toLowerCase() === selectBudget) &&
-					  (selectArchitecte === 'all' ||
+						(selectStructure === 'all' || post.acf.structure.toLowerCase() === selectStructure) &&
+						(selectSurface === 'all' || post.acf.surface.toLowerCase() === selectSurface) &&
+						(selectBudget === 'all' || post.acf.budget.toLowerCase() === selectBudget) &&
+						(selectArchitecte === 'all' ||
 							post.acf.architecte.toLowerCase() === selectArchitecte ||
 							post.acf.architecte_associé.toLowerCase() === selectArchitecte) &&
-					  (selectMaitre === 'all' || post.acf.maitre.toLowerCase() === selectMaitre) &&
-					  (selectAmenageur === 'all' || post.acf.amenageur.toLowerCase() === selectAmenageur) &&
-					  (selectPaysagiste === 'all' ||
+						(selectMaitre === 'all' || post.acf.maitre.toLowerCase() === selectMaitre) &&
+						(selectAmenageur === 'all' || post.acf.amenageur.toLowerCase() === selectAmenageur) &&
+						(selectPaysagiste === 'all' ||
 							post.acf.paysagiste.toLowerCase() === selectPaysagiste) &&
-					  (selectBureauEtudes === 'all' ||
+						(selectBureauEtudes === 'all' ||
 							post.acf.acousticien.toLowerCase() === selectBureauEtudes ||
 							post.acf.bet_general.toLowerCase() === selectBureauEtudes ||
 							post.acf.bet_structure.toLowerCase() === selectBureauEtudes ||
@@ -108,7 +108,7 @@
 							post.acf.bet_environnement.toLowerCase() === selectBureauEtudes ||
 							post.acf.bet_fluides.toLowerCase() === selectBureauEtudes ||
 							post.acf.economiste.toLowerCase() === selectBureauEtudes) &&
-					  (checkLaureat === false || post.acf.laureat === checkLaureat)
+						(checkLaureat === false || post.acf.laureat === checkLaureat)
 			);
 	} else {
 		filteredPosts = posts
@@ -154,22 +154,22 @@
 				selectPaysagiste === 'all'
 					? true
 					: (selectAnnee === 'all' || post.acf.annee == selectAnnee) &&
-					  (selectLocalisation === 'all' ||
+						(selectLocalisation === 'all' ||
 							(post.acf.localisation &&
 								post.acf.localisation.toLowerCase() === selectLocalisation) ||
 							(post.acf.localisation1 &&
 								post.acf.localisation1.toLowerCase() === selectLocalisation)) &&
-					  (selectStructure === 'all' || post.acf.structure.toLowerCase() === selectStructure) &&
-					  (selectSurface === 'all' || post.acf.surface.toLowerCase() === selectSurface) &&
-					  (selectBudget === 'all' || post.acf.budget.toLowerCase() === selectBudget) &&
-					  (selectArchitecte === 'all' ||
+						(selectStructure === 'all' || post.acf.structure.toLowerCase() === selectStructure) &&
+						(selectSurface === 'all' || post.acf.surface.toLowerCase() === selectSurface) &&
+						(selectBudget === 'all' || post.acf.budget.toLowerCase() === selectBudget) &&
+						(selectArchitecte === 'all' ||
 							post.acf.architecte.toLowerCase() === selectArchitecte ||
 							post.acf.architecte_associé.toLowerCase() === selectArchitecte) &&
-					  (selectMaitre === 'all' || post.acf.maitre.toLowerCase() === selectMaitre) &&
-					  (selectAmenageur === 'all' || post.acf.amenageur.toLowerCase() === selectAmenageur) &&
-					  (selectPaysagiste === 'all' ||
+						(selectMaitre === 'all' || post.acf.maitre.toLowerCase() === selectMaitre) &&
+						(selectAmenageur === 'all' || post.acf.amenageur.toLowerCase() === selectAmenageur) &&
+						(selectPaysagiste === 'all' ||
 							post.acf.paysagiste.toLowerCase() === selectPaysagiste) &&
-					  (selectBureauEtudes === 'all' ||
+						(selectBureauEtudes === 'all' ||
 							post.acf.acousticien.toLowerCase() === selectBureauEtudes ||
 							post.acf.bet_general.toLowerCase() === selectBureauEtudes ||
 							post.acf.bet_structure.toLowerCase() === selectBureauEtudes ||
@@ -177,7 +177,7 @@
 							post.acf.bet_environnement.toLowerCase() === selectBureauEtudes ||
 							post.acf.bet_fluides.toLowerCase() === selectBureauEtudes ||
 							post.acf.economiste.toLowerCase() === selectBureauEtudes) &&
-					  (checkLaureat === false || post.acf.laureat === checkLaureat)
+						(checkLaureat === false || post.acf.laureat === checkLaureat)
 			);
 	}
 
@@ -228,7 +228,6 @@
 			for (let i = 0; i < filteredPosts.length; i++) {
 				const a = filteredPosts[i];
 				const id = a.id;
-				const slug = a.slug;
 				const title = a.acf.projet.name;
 				const arch = a.acf.architecte;
 				const maitre = a.acf.maitre;
@@ -247,8 +246,7 @@
 					annee: annee,
 					img: img,
 					icon: myIcon,
-					id: id,
-					slug: slug
+					id: id
 				});
 				marker.bindPopup(
 					`<div class="sm">Projet</div>
