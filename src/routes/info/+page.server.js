@@ -1,19 +1,13 @@
-export const prerender = true;
-
 export const load = async () => {
-	const fetchInfo = async () => {
-		const res = await fetch(`https://pp.maop.fr/wp-json/wp/v2/pages/64`);
-		const data = await res.json();
-		return data;
-	};
-	const fetchLegal = async () => {
-		const res = await fetch(`https://pp.maop.fr/wp-json/wp/v2/pages/179`);
-		const data = await res.json();
-		return data;
-	};
+  const info = await fetch(`https://pp.maop.fr/wp-json/wp/v2/pages/64`).then(
+    (r) => r.json(),
+  );
+  const legal = await fetch(`https://pp.maop.fr/wp-json/wp/v2/pages/179`).then(
+    (r) => r.json(),
+  );
 
-	return {
-		info: await fetchInfo(),
-		legal: await fetchLegal()
-	};
+  return {
+    info: info,
+    legal: legal,
+  };
 };

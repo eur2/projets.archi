@@ -1,10 +1,15 @@
 <script>
-	import './styles.css';
-	// export let data;
+  import "../styles.css";
+  // export let data;
+  let { children } = $props();
+
 </script>
 
 <svelte:head>
-	<title>Projets: plateforme de publication des concours et consultations d’architecture</title>
+  <title
+    >Projets: plateforme de publication des concours et consultations
+    d’architecture</title
+  >
 </svelte:head>
 
-<slot />
+{@render children()}

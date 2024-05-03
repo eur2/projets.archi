@@ -1,23 +1,21 @@
 {
- "name": "my-app",
- "version": "0.0.1",
- "private": true,
- "scripts": {
-  "dev": "vite dev",
-  "build": "vite build",
-  "preview": "vite preview",
-  "lint": "prettier --plugin-search-dir . --check . && eslint .",
-  "format": "prettier --plugin-search-dir . --write ."
- },
- "devDependencies": {
-  "@sveltejs/adapter-auto": "^3.1.1",
-  "@sveltejs/kit": "^2.5.1",
-  "@sveltejs/vite-plugin-svelte": "^3.0.2",
-  "array-sort": "^1.0.0",
-  "leaflet": "^1.9.4",
-  "leaflet.markercluster": "^1.5.3",
-  "svelte": "^4.2.12",
-  "vite": "^5.1.4"
- },
- "type": "module"
+  "name": "my-app",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@sveltejs/adapter-auto": "^3.2.0",
+    "@sveltejs/kit": "^2.5.7",
+    "@sveltejs/vite-plugin-svelte": "^3.1.0",
+    "array-sort": "^1.0.0",
+    "leaflet": "^1.9.4",
+    "leaflet.markercluster": "^1.5.3",
+    "svelte": "^5.0.0-next.123",
+    "vite": "^5.2.11"
+  },
+  "type": "module"
 }

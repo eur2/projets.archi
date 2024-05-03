@@ -1,57 +1,93 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="preconnect" href="https://pp.maop.fr" />
+    <link
+      rel="preload"
+      href="%sveltekit.assets%/subset-SelfModern-Regular.woff2"
+      as="font"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="preload"
+      href="%sveltekit.assets%/subset-SelfModern-Italic.woff2"
+      as="font"
+      crossorigin="anonymous"
+    />
+    <link rel="icon" href="%sveltekit.assets%/favicon.png" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="theme-color" content="#efefef" />
+    <link
+      rel="manifest"
+      href="%sveltekit.assets%/manifest.json"
+      crossorigin="use-credentials"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="%sveltekit.assets%/apple-touch-icon.png"
+    />
+    <meta
+      name="description"
+      content="Projets est un atlas factuel d’architectures possibles sur la Région Occitanie. Projets est un outil informatif, développé par la Maison de l’Architecture Occitanie – Pyrénées, avec le soutien de Toulouse Métropole, du Conseil Départemental de la Haute Garonne, de la Région Occitanie et de Oppidea / Europolia."
+    />
+    <meta
+      name="og:title"
+      content="Projets: plateforme de publication des concours et consultations d’architecture"
+    />
+    <meta
+      name="og:description"
+      content="Projets est un atlas factuel d’architectures possibles sur la Région Occitanie. Projets est un outil informatif, développé par la Maison de l’Architecture Occitanie – Pyrénées, avec le soutien de Toulouse Métropole, du Conseil Départemental de la Haute Garonne, de la Région Occitanie et de Oppidea / Europolia."
+    />
+    <meta name="og:type" content="website" />
+    <meta
+      name="og:image"
+      content="%sveltekit.assets%/android-chrome-256x256.png"
+    />
+    <meta name="twitter:card" content="summary" />
+    <meta
+      name="twitter:title"
+      content="Projets: plateforme de publication des concours et consultations d’architecture"
+    />
+    <meta
+      name="twitter:description"
+      content="Projets est un atlas factuel d’architectures possibles sur la Région Occitanie. Projets est un outil informatif, développé par la Maison de l’Architecture Occitanie – Pyrénées, avec le soutien de Toulouse Métropole, du Conseil Départemental de la Haute Garonne, de la Région Occitanie et de Oppidea / Europolia."
+    />
+    <meta
+      name="twitter:image"
+      content="%sveltekit.assets%/android-chrome-256x256.png"
+    />
+    <style>
+      @font-face {
+        font-family: "Self Modern";
+        src: url("%sveltekit.assets%/subset-SelfModern-Regular.woff2")
+          format("woff2");
+        font-weight: normal;
+        font-style: normal;
+        font-display: fallback;
+      }
 
-<head>
-	<meta charset="utf-8" />
-	<link rel="preconnect" href="https://pp.maop.fr" />
-	<link rel="preload" href="%sveltekit.assets%/subset-SelfModern-Regular.woff2" as="font" crossorigin="anonymous" />
-	<link rel="preload" href="%sveltekit.assets%/subset-SelfModern-Italic.woff2" as="font" crossorigin="anonymous" />
-	<link rel="icon" href="%sveltekit.assets%/favicon.png" />
-	<meta name="viewport" content="width=device-width" />
-	<meta name="theme-color" content="#efefef" />
-	<link rel="manifest" href="%sveltekit.assets%/manifest.json" crossorigin="use-credentials">
-	<link rel="apple-touch-icon" href="%sveltekit.assets%/apple-touch-icon.png">
-	<meta name="description"
-		content="Projets est un atlas factuel d’architectures possibles sur la Région Occitanie. Projets est un outil informatif, développé par la Maison de l’Architecture Occitanie – Pyrénées, avec le soutien de Toulouse Métropole, du Conseil Départemental de la Haute Garonne, de la Région Occitanie et de Oppidea / Europolia." />
-	<meta name="og:title" content="Projets: plateforme de publication des concours et consultations d’architecture" />
-	<meta name="og:description"
-		content="Projets est un atlas factuel d’architectures possibles sur la Région Occitanie. Projets est un outil informatif, développé par la Maison de l’Architecture Occitanie – Pyrénées, avec le soutien de Toulouse Métropole, du Conseil Départemental de la Haute Garonne, de la Région Occitanie et de Oppidea / Europolia." />
-	<meta name="og:type" content="website" />
-	<meta name="og:image" content="%sveltekit.assets%/android-chrome-256x256.png" />
-	<meta name="twitter:card" content="summary" />
-	<meta name="twitter:title"
-		content="Projets: plateforme de publication des concours et consultations d’architecture" />
-	<meta name="twitter:description"
-		content="Projets est un atlas factuel d’architectures possibles sur la Région Occitanie. Projets est un outil informatif, développé par la Maison de l’Architecture Occitanie – Pyrénées, avec le soutien de Toulouse Métropole, du Conseil Départemental de la Haute Garonne, de la Région Occitanie et de Oppidea / Europolia." />
-	<meta name="twitter:image" content="%sveltekit.assets%/android-chrome-256x256.png" />
-	<style>
-		@font-face {
-			font-family: 'Self Modern';
-			src: url('%sveltekit.assets%/subset-SelfModern-Regular.woff') format('woff');
-			src: url('%sveltekit.assets%/subset-SelfModern-Regular.woff2') format('woff2');
-			font-weight: normal;
-			font-style: normal;
-			font-display: fallback;
-		}
+      @font-face {
+        font-family: "Self Modern";
+        src: url("%sveltekit.assets%/subset-SelfModern-Italic.woff2")
+          format("woff2");
+        font-weight: normal;
+        font-style: italic;
+        font-display: fallback;
+      }
+    </style>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@minimal-analytics/ga4/dist/index.js"
+      async
+    ></script>
 
-		@font-face {
-			font-family: 'Self Modern';
-			src: url('%sveltekit.assets%/subset-SelfModern-Italic.woff') format('woff');
-			src: url('%sveltekit.assets%/subset-SelfModern-Italic.woff2') format('woff2');
-			font-weight: normal;
-			font-style: italic;
-			font-display: fallback;
-		}
-	</style>
-	<script src="https://cdn.jsdelivr.net/npm/@minimal-analytics/ga4/dist/index.js" async></script>
-
-	<script>
-		window.minimalAnalytics = {
-			trackingId: 'G-4H2FXQMLC9', // <-- replace with your GA4 property ID
-			autoTrack: true,
-		};
-	</script>
-	<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-4H2FXQMLC9"></script>
+    <script>
+      window.minimalAnalytics = {
+        trackingId: "G-4H2FXQMLC9", // <-- replace with your GA4 property ID
+        autoTrack: true,
+      };
+    </script>
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-4H2FXQMLC9"></script>
 	<script>
 		window.dataLayer = window.dataLayer || [];
 		function gtag() { dataLayer.push(arguments); }
@@ -59,11 +95,10 @@
 
 		gtag('config', 'G-4H2FXQMLC9');
 	</script> -->
-	%sveltekit.head%
-</head>
+    %sveltekit.head%
+  </head>
 
-<body data-sveltekit-preload-data="hover">
-	<div style="display: contents">%sveltekit.body%</div>
-</body>
-
+  <body data-sveltekit-preload-data="hover">
+    <div style="display: contents">%sveltekit.body%</div>
+  </body>
 </html>
