@@ -279,7 +279,7 @@
   ></div>
   <div class={!visible ? "open-content" : "close-content"}>
     <div class="t0 r0 p025 fixed">
-      <button onclick={handleToggle}>
+      <button title="close" onclick={handleToggle}>
         <svg
           width="24"
           height="24"
